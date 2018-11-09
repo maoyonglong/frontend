@@ -129,7 +129,7 @@ del和ins标签应该一起使用，以显示更换前后的文本
 | &lt; meter &gt; | | 仪表 | 状态进度条 |
 > 笔记：
 1. 表单元素兼容性查看 [H5表单元素当前状态](https://www.wufoo.com/html5/)
-2. label标签用于标记其它表单元素，多与input联用。组合方式一般是：
+2. label标签用于标记其它表单元素，多与input联用。组合方式一般是:
 
 ```html
 <label for="form-el"><input id="form-el" /></label>
