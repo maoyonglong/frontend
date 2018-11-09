@@ -52,7 +52,7 @@ del和ins标签应该一起使用，以显示更换前后的文本
 * 工具标签
 
 
-1. 表格
+1.表格
 
 | 标签 | 语义 | 默认样式 |
 | ---- | ---- | ---- |
@@ -128,11 +128,36 @@ del和ins标签应该一起使用，以显示更换前后的文本
 | &lt; progress &gt; | | 进度条 | 单一色进度条 |
 | &lt; meter &gt; | | 仪表 | 状态进度条 |
 > 笔记：
-1. 表单元素兼容性查看 [H5表单元素当前状态](https://www.wufoo.com/html5/)
-2. label标签用于标记其它表单元素，多与input联用。组合方式一般是:
+* 表单元素兼容性查看 [H5表单元素当前状态](https://www.wufoo.com/html5/)
+* label标签用于标记其它表单元素，多与input联用，使用for和关联的input的id对应。组合方式一般是:
 
 ```html
-<label for="form-el"><input id="form-el" /></label>
+<label for="form-el1-id">标记：<input id="form-el1-id" /></label>
+<label for="form-el2-id">标记：</label><input id="form-el2-id" />
 ```
+> * form的action属性确定提交路径，method属性确定提交方式（GET和POST）  
+* 表单元素使用name属性绑定提交时的字段，使用value属性绑定对应的值
+* 文本域(input作为输入框和textarea)时，使用placeholder添加提示文本
+* input、select和textarea元素都有required属性，表示必须填写字段
+* 表单元素都有disaled属性，input（输入框时）和textarea有readonly属性。前者表示不可用，不提交；后者表示只读，值不可更改，提交。
+* input文本域（输入框）具有pattern属性，用于使用正则表达式校验文本。
+
+3.多媒体和嵌入元素
+
+| 标签 | 语义 | 
+| ---- | ----- |
+| &lt; figure &gt; | 独立流内容区域（一般指插图）|
+| &lt; figcaption &gt; | figure的标题 |
+| &lt; img &gt; | 图片 |
+| &lt; audio &gt; | 音频 |
+| &lt; video &gt; | 视频 |
+| &lt; track &gt; | 歌词或字幕 |
+| &lt; iframe &gt; | 内嵌网页 |
+| &lt; embed &gt; | 嵌入多媒体（一般是falsh）|
+| &lt; object &gt; | 嵌入多媒体（一般是pdf）|
+| &lt; param &gt; | object标签的参数 |
+> 笔记：
+1. track标签兼容性不太好；在移动端，屏幕放大可能会消失。
+2. video和audio标签都有autoplay、controls、loop、muted、preload、src属性。其中，前四者是绝对真值，不需要赋值，只要出现就表示应用该属性；preload设置载入情况、src是媒体路径。
 
 
