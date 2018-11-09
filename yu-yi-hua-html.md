@@ -157,8 +157,8 @@ del和ins标签应该一起使用，以显示更换前后的文本
 | &lt; object &gt; | 嵌入多媒体（一般是pdf）|
 | &lt; param &gt; | object标签的参数 |
 > 笔记：
-1. track标签兼容性不太好；在移动端，屏幕放大可能会消失。
-2. video和audio标签都有autoplay、controls、loop、muted、preload、src属性。其中，前四者是绝对真值，不需要赋值，只要出现就表示应用该属性；preload设置载入情况、src是媒体路径
+* track标签兼容性不太好；在移动端，屏幕放大可能会消失。
+* video和audio标签都有autoplay、controls、loop、muted、preload、src属性。其中，前四者是绝对真值，不需要赋值，只要出现就表示应用该属性；preload设置载入情况、src是媒体路径
 
 
 
