@@ -135,7 +135,8 @@ del和ins标签应该一起使用，以显示更换前后的文本
 <label for="form-el1-id">标记：<input id="form-el1-id" /></label>
 <label for="form-el2-id">标记：</label><input id="form-el2-id" />
 ```
-> * form的action属性确定提交路径，method属性确定提交方式（GET和POST）  
+> 
+* form的action属性确定提交路径，method属性确定提交方式（GET和POST）  
 * 表单元素使用name属性绑定提交时的字段，使用value属性绑定对应的值
 * 文本域(input作为输入框和textarea)时，使用placeholder添加提示文本
 * input、select和textarea元素都有required属性，表示必须填写字段
