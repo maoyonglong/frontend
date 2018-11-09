@@ -99,6 +99,32 @@ del和ins标签应该一起使用，以显示更换前后的文本
 | | password | 密码输入框 | 输入文本变圆圈 |
 | | search | 搜索输入框 | 浏览器差异 |
 | | tel | 电话号码输入框 | |
-| | url | url输入框 | |
+| | url | url输入框 | | 
+| | button | 普通按钮 | |
+| | submit | 提交按钮 | |
+| | reset | 重置按钮 | |
+| | image | 图片按钮 | |
+| | file | 文件选择器 | |
+| | radio | 单选框 | 可选圆点 |
+| | checkbox | 复选框 | 可选方框 |
+| | number | 数字输入框 |  |
+| | range | 滑块 | 滑块条 |
+| | datetime-local | 日期时间选择器 | 年月日+时间 |
+| | date | 日期选择器 | 年月日 |
+| | month | 月选择器 | 月 |
+| | time | 时间选择器 | 时间 |
+| | week | 周选择器 | 周 |
+| | color | 拾色器 | 拾色面板 |
+| | hidden | 隐藏内容 | 不可见 |
+| &lt; textarea &gt; |  | 多行文本框 | |
+| &lt; button &gt; | button(或不写) | 普通按钮 | |
+| | submit | 提交按钮 | |
+| | reset | 重置按钮 | |
+| &lt; select &gt; | | 下拉框 | |
+| &lt; option &gt; | | 下拉框选项 | |
+| &lt; progress &gt; | | 进度条 | 单一色进度条 |
+| &lt; meter &gt; | | 仪表 | 状态进度条 |
+> 笔记：
+1. 表单元素兼容性查看 [H5表单元素当前状态](https://www.wufoo.com/html5/)
 
 
