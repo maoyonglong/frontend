@@ -121,7 +121,8 @@ del和ins标签应该一起使用，以显示更换前后的文本
 | | submit | 提交按钮 | |
 | | reset | 重置按钮 | |
 | &lt; select &gt; | | 下拉框 | |
-| &lt; option &gt; | | 下拉框选项 | |
+| &lt; datalist &gt; | | 菜单列表 | 下拉菜单列表 | 
+| &lt; option &gt; | | 选项 | |
 | &lt; progress &gt; | | 进度条 | 单一色进度条 |
 | &lt; meter &gt; | | 仪表 | 状态进度条 |
 > 笔记：
