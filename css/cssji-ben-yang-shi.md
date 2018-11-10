@@ -92,5 +92,7 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 * 表格标题可以放置在上下两个位置
 * border-collapse的属性值是collapse和separate，分别表示合并和分离
 
+* 表单样式
 
-
+| 属性 | 复合属性 | 效果 |
+| ---- | ---- | ---- |
