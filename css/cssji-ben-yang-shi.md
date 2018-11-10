@@ -36,7 +36,7 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 | | | width | all-direction | 图像边界宽度 |
 | | | offset | all-direction | 边框图像和边框的距离 |
 | | | repeat | | 重复方式 |
-* box-sizing有两个属性值：border-box和content-box，分别表示border限定的盒子大小不变（自动改变元素内容盒子大小来适应）和表示元素内容盒子大小不变。
+> * box-sizing有两个属性值：border-box和content-box，分别表示border限定的盒子大小不变（自动改变元素内容盒子大小来适应）和表示元素内容盒子大小不变。
 * 设置box-shadow，要明白默认阴影大小和元素大小一致；模糊半径和border-radius很像，把阴影圆角模糊；spread是在默认阴影下叠加阴影；inset是将阴影反转，改为内嵌。
 
 * 文本样式
