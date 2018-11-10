@@ -58,9 +58,10 @@ del和ins标签应该一起使用，以显示更换前后的文本
 | 标签 | 语义 | 默认样式 |
 | ---- | ---- | ---- |
 | &lt; table &gt; | 表格 | 无 |
-| &lt; thead &gt; | 表格头部 | 字体垂直水平居中 |
-| &lt; tbody &gt; | 表格内容主体 | 字体垂直居中 |
-| &lt; tfoot &gt; | 表格尾部 | 字体垂直居中 |
+| &lt; caption &gt; | 表格标题 | 文本水平居中 |
+| &lt; thead &gt; | 表格头部 | 文本垂直水平居中 |
+| &lt; tbody &gt; | 表格内容主体 | 文本垂直居中 |
+| &lt; tfoot &gt; | 表格尾部 | 文本垂直居中 |
 | &lt; tr &gt; | 表格内容行 | 无 |
 | &lt; th &gt; | 表格标题单元格 | 粗体 |
 | &lt; td &gt; | 表格单元格 | 无 |
@@ -69,6 +70,7 @@ del和ins标签应该一起使用，以显示更换前后的文本
 
 ```html
 <table>
+    <caption></caption>
     <thead>
         <tr>
             <th></th> 
