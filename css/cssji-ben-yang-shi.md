@@ -15,6 +15,8 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 | | style | 线条样式 |
 | | color | 边框颜色 |
 | margin | all-direction | 元素外边距左 |
+| overflow | x | 水平方向溢出处理 |
+| | y | 垂直方向溢出处理 |
 | box-sizing  |  | 限制盒子的大小 |
 | box-shadow | h-shadow | 阴影水平偏移位置 |
 | | v-shadow | 阴影垂直偏移位置 |
@@ -57,11 +59,16 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 | text-justify | | 两端对齐处理方式 |
 | text-indent | | 首行缩进 |
 | text-transform | | 大小写和首字母大写 |
+| text-shadow | h-shadow | 文本水平阴影偏移 |
+| | v-shadow | 文本垂直阴影偏移 |
+| | blur | 模糊半径 |
+| | color | 阴影颜色 | 
 | word-break | | 非CJK单词断行方式 |
 | word-wrap | | 长单词（如url）换行方式 |
 > 笔记：
 * letter-spacing和word-spacing用于处理间距
 * text-align有justify属性值，表示两端对齐，这时，可以用text-justify来设置两端对齐的处理方式
+* text-shadow和box-shadow是相似的，区别仅仅在于text-shadow没有spread和inset属性值
 * 一行显示不完文本，末尾添加省略号显示的方法：
 
 ```css
@@ -74,6 +81,16 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 
 * 表格样式
 
+| 属性 | 复合属性 | 效果 |
+| border-collapse | | 是否合并边框 |
+| border-spacing | h | 相邻单元格之间的水平距离 |
+| | v | 相邻单元格之间的垂直距离 |
+| caption-side | | 表格标题位置 |
+| empty-cells | | 空白单元格样式处理 |
+| table-layout | | 列宽的决定方式 |
+> 笔记：
+* 表格标题可以放置在上下两个位置
+* border-collapse的属性值是collapse和separate，分别表示合并和分离
 
 
 
