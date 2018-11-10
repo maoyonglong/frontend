@@ -65,10 +65,15 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 * 一行显示不完文本，末尾添加省略号显示的方法：
 
 ```css
-*{
-
+.ellipsis{
+    white-space: nowrap; /*不换行*/
+    overflow: hidden; /*溢出隐藏*/
+    text-overflow: ellipsis; /*溢出文本显示省略号*/
 }
 ```
+
+* 表格样式
+
 
 
 
