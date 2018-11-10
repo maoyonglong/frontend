@@ -48,6 +48,27 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 | | weight | 字体粗细 |
 | | size/line-height | 字体大小/行高 |
 | | family | 字体系列 |
-| | caption 
+| direction | | 文本书写方向 |
+| letter-spacing | | 字符间距 |
+| word-spacing | |单词间距 |
+| white-space | | 空白处理 |
+| text-overflow | | 溢出文本处理 |
+| text-align | | 水平对齐方式 |
+| text-justify | | 两端对齐处理方式 |
+| text-indent | | 首行缩进 |
+| text-transform | | 大小写和首字母大写 |
+| word-break | | 非CJK单词断行方式 |
+| word-wrap | | 长单词（如url）换行方式 |
+> 笔记：
+* letter-spacing和word-spacing用于处理间距
+* text-align有justify属性值，表示两端对齐，这时，可以用text-justify来设置两端对齐的处理方式
+* 一行显示不完文本，末尾添加省略号显示的方法：
+
+```css
+*{
+
+}
+```
+
 
 
