@@ -82,6 +82,7 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 * 表格样式
 
 | 属性 | 复合属性 | 效果 |
+| ---- | ---- | ---- |
 | border-collapse | | 是否合并边框 |
 | border-spacing | h | 相邻单元格之间的水平距离 |
 | | v | 相邻单元格之间的垂直距离 |
