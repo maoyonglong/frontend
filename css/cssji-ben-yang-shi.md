@@ -4,7 +4,7 @@
 all-direction表示所有方位（顺序为top、right、bottom、left）
 如非必要，忽略inherit、initial、unset
 
-* 盒子属性
+* 盒子样式
 
 | 属性 | 复合属性 | 效果 |
 | ---- | ---- | --- |
@@ -36,5 +36,18 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 | | | repeat | | 重复方式 |
 * box-sizing有两个属性值：border-box和content-box，分别表示border限定的盒子大小不变（自动改变元素内容盒子大小来适应）和表示元素内容盒子大小不变。
 * 设置box-shadow，要明白默认阴影大小和元素大小一致；模糊半径和border-radius很像，把阴影圆角模糊；spread是在默认阴影下叠加阴影；inset是将阴影反转，改为内嵌。
+
+* 文本样式
+
+| 属性 | 复合属性 | 效果 |
+| ---- | ---- | ---- |
+| color | | 字体颜色 |
+| line-height | | 行高 |
+| font | style | 字体样式 |
+| | variant | 字体异体 |
+| | weight | 字体粗细 |
+| | size/line-height | 字体大小/行高 |
+| | family | 字体系列 |
+| | caption 
 
 
