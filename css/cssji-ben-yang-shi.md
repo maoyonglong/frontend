@@ -209,6 +209,7 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 | visibility | visible | 元素可见 |
 | | hidden | 元素不可见 |
 | | collapse | 隐藏表格中的行，非&lt; tr &gt; 表现为hidden|
+> 笔记：
 * display:none和visibility:hidden的区别是前者脱离页面dom树，而后者没有，而且占据空间，影响布局。
 * visibilty的hidden和collapse的区别是前者占据空间影响布局，后者会被中下一行元素覆盖，不影响布局
 
