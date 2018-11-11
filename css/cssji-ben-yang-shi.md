@@ -166,7 +166,14 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 * 清浮动样式：
 
 ```css
-
+.clearfix::after{
+    content: "",
+    display: block;
+    clear: both;
+}
+.overfw-bfc{
+    overflow: hidden;
+}
 ```
 
 2.定位
