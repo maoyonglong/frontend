@@ -97,3 +97,147 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 
 | 属性 | 复合属性 | 效果 |
 | ---- | ---- | ---- |
+| appearance | | 外观 |
+| outline | color | 轮廓颜色 |
+| | style | 轮廓类型 |
+| | width | 轮廓宽度 |
+> 笔记：
+* appearance是用户外观样式，它可以选择让标签看起来像按钮、图标等，有兼容性问题，需要加前缀，而且一般用在移动端。
+* outline一般指input输入框聚焦时显示的轮廓，设置和border类型，仅仅是复合顺序不同。
+
+ * 列表样式
+ 
+ 
+  | 属性 | 复合属性 | 效果 |
+  | ---- | ---- | ---- |
+  | list-style | type | 列表项标记方式 |
+  | | position | 列表项位置 |
+  | | image | 自定义列表图标标记 |
+  > 笔记：
+  * 一般会使用list-style:none让list的标记消失。
+  * list-style-position有两个属性值，分别是inside和outside(默认),inside的话，列表会被填充更多的右padding-start，让其整体右移，像缩进去一样。
+  
+  * 背景样式
+  
+  
+  | 属性 | 复合属性 | 效果 |
+  | ---- | ---- | ---- |
+  | background | color | 背景颜色 |
+  | | image | 背景图片 |
+  | | position/size | 图片位置/图片大小 |
+  | | repeat | 重复图片的方式 |
+  | | origin | 图片定位参照点 |
+  | | clip | 图片裁剪 |
+  | | attachment | 背景是否固定 |
+  
+  > 笔记
+  * background的position和size都有二个值，水平值和垂直值。当第一个值（水平值确定）而垂直值不定时，垂直值为auto。
+  * background的size还可以设置单值，属性值为cover和contain。
+  * background的position有x和y是复合属性，而size不是。
+  * background的origin和clip的属性值都是content-box、padding-box和border-box
+  * background-attachment的属性值是scroll和fixed
+  * background可以设置多个背景图像及背景图片相关属性(ie8及以下不兼容)：
+  ```css
+  .muti-bg-img{
+      background-image: url(./bg1.jpg), url(./bg2.jpg); 
+      background-position: left top, center center;
+      background-repeat: repeat-x, no-repeat;
+      background-attachment: fixed, scroll;
+  }
+  ```
+  等价于:
+  ```css
+  .muti-bg-img{
+      background: url(./bg1.jpg) left top repeat-x fixed, url(./bg2.jpg) center center no-repeat scroll;
+  }
+  ```
+  
+* 布局样式  
+
+1.浮动
+
+| 属性 | 效果 |
+| ---- | ---- |
+| float | 浮动 | 
+| clear | 清浮动 |
+| overflow | 溢出隐藏 |
+> 笔记：
+* 浮动脱离文档流，不会撑开容器高度，不过可以使用清浮动解决。
+* 清浮动样式：
+
+```css
+/* 使用伪子类clear清浮动 */
+.clearfix::after{
+    content: "",
+    display: block;
+    clear: both;
+}
+/* 生成BFC清浮动 */
+.overfw-bfc{
+    overflow: hidden;
+}
+```
+
+2.定位
+
+| 属性 | 属性值 | 效果 |
+| ---- | ---- | ---- |
+| position | relative | 相对定位 |
+| | absolute | 绝对定位 |
+| | fixed | 固定定位 |
+| | static | 默认值不使用定位 |
+| left | 长度或者% | 相对参照物左边距离 |
+| right| 长度或者% | 相对参照物右边距离 |
+| top | 长度或者% | 相对参照物上面距离 |
+| bottom | 长度或者% | 相对参照物下面距离 |
+| z-index | 数值 | 定位堆叠的层级号 |
+> 笔记：
+* relative相对自身定位，不脱离文档流，占据原来的空间
+* absolute相对最近的非static定位的父元素定位，脱离文档流。与浮动不同的是，没有类似清浮动的方法可以使容器高度自适应。
+* fixed相对浏览器可视窗口定位
+* z-index表示层号，数值大的覆盖数值小的。
+
+* 元素类型和显示
+
+| 属性 | 属性值 | 效果 |
+| ---- | ---- | ---- |
+| display | block | 块级元素 |
+| | inline-block | 行内块元素 |
+| | inline | 行内元素 |
+| | none | 不显示 |
+| | table-cell | 类表格单元格元素 |
+| visibility | visible | 元素可见 |
+| | hidden | 元素不可见 |
+| | collapse | 隐藏表格中的行，非&lt; tr &gt; 表现为hidden|
+* display:none和visibility:hidden的区别是前者脱离页面dom树，而后者没有，而且占据空间，影响布局。
+* visibilty的hidden和collapse的区别是前者占据空间影响布局，后者会被中下一行元素覆盖，不影响布局
+
+* 弹性盒子
+
+容器：
+
+| 属性 | 效果 |
+| ---- | ---- |
+| flex-direction | 主轴方向 |
+| flex-wrap | 项目换行处理方式 |
+| flex-flow | flex-direction flex-wrap的复合简写|
+| justify-content | 主轴上项目的对齐方式 |
+| align-items | 交叉轴上单行项目的对齐方式 |
+| align-content | 交叉轴上多行项目的对齐方式
+
+项目：
+
+| 属性 | 复合属性 | 效果 |
+| ---- | ---- | ---- |
+| flex | grow | 项目扩大比例 |
+| | shrink | 项目缩小比例 |
+| | basic | 项目原来占有的空间 |
+| order | | 项目排列顺序 |
+| align-self | | 单个项目在交叉轴的对齐方式 | 
+> 笔记：
+* 空间是否剩余和是否不足，由容器大小和项目的basis决定
+* grow是剩余空间的划分比例，shrink是空间不足时项目的缩小比例
+* 除了空间不足换行，align-seif导致项目与其它项目的交叉轴对齐方式不同，也会出现多行样式
+* align-items和align-content的区别在于单行控制和多行控制 [demo](https://codepen.io/maoyonglong/pen/KrgXRv)
+* 参考http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+
