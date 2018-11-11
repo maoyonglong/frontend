@@ -97,3 +97,77 @@ all-direction表示所有方位（顺序为top、right、bottom、left）
 
 | 属性 | 复合属性 | 效果 |
 | ---- | ---- | ---- |
+| appearance | | 外观 |
+| outline | color | 轮廓颜色 |
+| | style | 轮廓类型 |
+| | width | 轮廓宽度 |
+> 笔记：
+* appearance是用户外观样式，它可以选择让标签看起来像按钮、图标等，有兼容性问题，需要加前缀，而且一般用在移动端。
+* outline一般指input输入框聚焦时显示的轮廓，设置和border类型，仅仅是复合顺序不同。
+
+ * 列表样式
+ 
+ 
+  | 属性 | 复合属性 | 效果 |
+  | ---- | ---- | ---- |
+  | list-style | type | 列表项标记方式 |
+  | | position | 列表项位置 |
+  | | image | 自定义列表图标标记 |
+  > 笔记：
+  * 一般会使用list-style:none让list的标记消失。
+  * list-style-position有两个属性值，分别是inside和outside(默认),inside的话，列表会被填充更多的右padding-start，让其整体右移，像缩进去一样。
+  
+  * 背景样式
+  
+  
+  | 属性 | 复合属性 | 效果 |
+  | ---- | ---- | ---- |
+  | background | color | 背景颜色 |
+  | | image | 背景图片 |
+  | | position/size | 图片位置/图片大小 |
+  | | repeat | 重复图片的方式 |
+  | | origin | 图片定位参照点 |
+  | | clip | 图片裁剪 |
+  | | attachment | 背景是否固定 |
+  
+  > 笔记
+  * background的position和size都有二个值，水平值和垂直值。当第一个值（水平值确定）而垂直值不定时，垂直值为auto。
+  * background的size还可以设置单值，属性值为cover和contain。
+  * background的position有x和y是复合属性，而size不是。
+  * background的origin和clip的属性值都是content-box、padding-box和border-box
+  * background-attachment的属性值是scroll和fixed
+  * background可以设置多个背景图像及背景图片相关属性(ie8及以下不兼容)：
+  ```css
+  .muti-bg-img{
+      background-image: url(./bg1.jpg), url(./bg2.jpg); 
+      background-position: left top, center center;
+      background-repeat: repeat-x, no-repeat;
+      background-attachment: fixed, scroll;
+  }
+  ```
+  等价于:
+  ```css
+  .muti-bg-img{
+      background: url(./bg1.jpg) left top repeat-x fixed, url(./bg2.jpg) center center no-repeat scroll;
+  }
+  ```
+  
+* 布局样式  
+
+1.浮动
+
+| 属性 | 效果 |
+| ---- | ---- |
+| float | 浮动 | 
+| clear | 清浮动 |
+| overflow | 溢出隐藏 |
+> 笔记：
+* 浮动脱离文档流，不会撑开容器高度
+* 清浮动样式：
+
+```css
+
+```
+
+2.定位
+| 
