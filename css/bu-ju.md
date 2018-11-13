@@ -23,11 +23,21 @@
     行列轨道用于确定网格的模板。声明方式为：
     ```css
     .grid-box{
-        grid-template-rows: 100px repeat(2, 1fr);
-        grid-template-columns: repeat(2, 1fr 1fr);
+        grid-template-rows: 100px repeat(2, 1fr); /*行轨道*/
+        grid-template-columns: repeat(2, 1fr 1fr); /*列轨道*/
+        grid-column-gap: 10px; /*列间隔*/
+        grid-row-gap: 4px;/*行间隔*/
     }
     ```
-    
-
+    > 笔记：
+    > fr单位是等分剩余内容的单位，repeat()用于重复轨道宽度的声明，所以上面代码声明了一个三行四列的网格。
+    * ######隐式网格
+    像上面那样给出了完整的行列轨道，叫做显示网格。还有一种情况，就是只给出了行或者只给出了列，那么另外的轨道需要靠内容决定。
+    ```css
+    .grid-box{
+        grid-template-column: 1fr 1fr;
+        grid-auto-rows: minmax(200px, auto); /*隐式行轨道*/
+    }
+    ```
 
 
