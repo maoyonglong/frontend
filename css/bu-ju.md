@@ -36,7 +36,27 @@
     ```css
     .grid-box{
         grid-template-column: 1fr 1fr;
-        grid-auto-rows: minmax(200px, auto); /*隐式行轨道*/
+        grid-auto-rows: minmax(200px, auto); /*隐式行轨道高度*/
+    }
+    ```
+    ```css
+    .grid-box{
+        grid-template-rows: 1fr 1fr;
+        grid-auto-columns: 200px; /*隐式列轨道宽度*/
+    }
+    ```
+    > 笔记：
+    > 1.只要网格数不够用，隐式网格就会增加一行或者一列。
+    > 2.minmax(min, max)表示长度在[min, max]区间内。
+    * ######元素定位
+    在网格容器中定义主元素，是依据网格线而不是依据网格轨道实现的。网格容器中子元素还能使z-index生效，用于改变层级关系。
+    ```css
+    .grid{
+       grid-column-start: 1;
+       grid-column-end: 4;
+       grid-row-start: 1;
+       grid-row-end: 3;
+       z-index: 2;
     }
     ```
 
