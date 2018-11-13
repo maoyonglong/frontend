@@ -1,4 +1,4 @@
-# 布局
+# 网格布局和弹性布局
 
 ## 一、网格布局（Grid Layout）
 * __简要说明__  
@@ -130,5 +130,7 @@
     * ######参考
     
     [flex布局教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+    
+
     
     
