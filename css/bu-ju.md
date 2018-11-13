@@ -64,6 +64,8 @@
     > 1.网格容器中只有直接子元素（网格项目）参与布局定位，其它元素符合文档流
     > 2.display:contents会使网格的直接子元素的盒子消失，那么它的子元素就变成了网格容器的直接子元素，会参与到网格布局中
     > 3.绝对定位的网格项目先相对于自身的grid-column/row-start定位，如果没有设置这些属性，那么特性和不同绝对定位元素一样相对于最近非static父元素定位。
+    * ######参考
+    [网格布局的基本概念](https://developer.mozilla.org/zh-CN/docs/web/css/css_grid_layout/basic_concepts_of_grid_layout)
     
 # 二、弹性布局（Flexbox Layout）
 * __简要说明__  
@@ -99,7 +101,7 @@
     ```csss
         flex-flow：<flex-direction> <flex-wrap>
     ```
-    * 项目尺寸
+    * ######项目尺寸
     ```css
     .flex{
         flex-grow: 1; /*剩余空间分配比例*/
@@ -117,7 +119,7 @@
         flex: <flex-grow> <flex-shrink> <flex-basis> 
     }
     ```
-    * __项目定位__
+    * ######项目定位
     ```css
     .flex{
         align-self: flex-end; /*该项目在交叉轴的定位方式*/
@@ -125,8 +127,8 @@
     ```
     > 笔记：
     > 项目的align-self可以打破容器在交叉轴上的定位规则
-    * __参考__
+    * ######参考
     
-    http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+    [flex布局教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
     
     
