@@ -63,7 +63,7 @@
     > 笔记：
     > 1.网格容器中只有直接子元素（网格项目）参与布局定位，其它元素符合文档流
     > 2.display:contents会使网格的直接子元素的盒子消失，那么它的子元素就变成了网格容器的直接子元素，会参与到网格布局中
-    > 3.绝对定位的网格项目先相对于自身的grid-column/row-start定位，如果没有设置这些属性，那么特性和不同绝对定位元素一样相对于最近非static父元素定位。
+    > 3.绝对定位的网格项目先相对于自身的grid-column/row-start定位，如果没有设置这些属性，那么特性和普通绝对定位元素一样相对于最近非static父元素定位。
     * ######参考
     [网格布局的基本概念](https://developer.mozilla.org/zh-CN/docs/web/css/css_grid_layout/basic_concepts_of_grid_layout)
     
