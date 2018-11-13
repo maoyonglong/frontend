@@ -97,7 +97,7 @@
     > 1.align-items和align-content分别只对单交叉轴和多交叉轴项目对齐起作用。
     > 2.flex-direction和flex-wrap可以简写成:
     ```csss
-        flex-flow：<flex-direction> || <flex-wrap>
+        flex-flow：<flex-direction> <flex-wrap>
     ```
     * 项目尺寸
     ```css
@@ -108,6 +108,25 @@
     }
     ```
     > 笔记：
-    1.
+    1.所有项目尺寸属性都是相对于主轴而言的。
+    2.grow和shrink是基于basis来计算空间是否剩余、不足还是刚好的。
+    3.grow和shrink的比例都是相对于其它项目而言的；0表示不变化。
+    4.项目尺寸属性可以简写成：
+    ```css
+    .flex{
+        flex: <flex-grow> <flex-shrink> <flex-basis> 
+    }
+    ```
+    * __项目定位__
+    ```css
+    .flex{
+        align-self: flex-end; /*该项目在交叉轴的定位方式*/
+    }
+    ```
+    > 笔记：
+    > 项目的align-self可以打破容器在交叉轴上的定位规则
+    * __参考__
+    
+    http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
     
     
