@@ -49,7 +49,7 @@
     > 笔记：
     > 1.只要网格数不够用，隐式网格就会增加一行或者一列。
     > 2.minmax(min, max)表示长度在[min, max]区间内。
-    * ######元素定位
+    * ######项目定位
     在网格容器中定义主元素，是依据网格线而不是依据网格轨道实现的。网格容器中子元素还能使z-index生效，用于改变层级关系。
     ```css
     .grid{
@@ -68,7 +68,46 @@
 # 二、弹性布局（Flexbox Layout）
 * __简要说明__  
 
-    弹性布局和网格布局非常相似，最大的区别是前者是一维的，而后者是二维的。
+    弹性布局和网格布局非常相似，最大的区别是前者是一维的，只定义规则而不制定目标，而后者是二维的;制定模板。
     
 * __弹性布局示意图__
 ![弹性布局示意图](./imgs/flex.png)
+其中：
+1.flex container是弹性盒子（弹性布局容器），而flex item是弹性布局项目。
+2.弹性布局可以具有一条主轴(main axis)和多条交叉轴(cross axis)，多条交叉轴只有项目被迫换行时产生。轴用于定位，start为开始位置，end为结束位置
+3.项目在主轴和交叉轴的方向上的大小为main size和cross size。
+* 相关css属性
+    * ######声明布局
+    ```css
+    .flex-box{
+        display: flex;
+    }
+    ```
+    * ######声明容器规则
+    ```css
+    .flex-box{
+        flex-direction: row; /*主轴方向*/
+        flex-wrap: wrap; /*是否换行*/
+        justify-content: space-around; /*主轴对齐方式*/
+        align-items: stretch; /*单交叉轴(单行)对齐方式*/
+        align-content: flex-start; /*多交叉轴（多行）对齐方式*/
+    }
+    ```
+    > 笔记：
+    > 1.align-items和align-content分别只对单交叉轴和多交叉轴项目对齐起作用。
+    > 2.flex-direction和flex-wrap可以简写成:
+    ```csss
+        flex-flow：<flex-direction> || <flex-wrap>
+    ```
+    * 项目尺寸
+    ```css
+    .flex{
+        flex-grow: 1; /*剩余空间分配比例*/
+        flex-shrink: 1;/*空间不足缩小比例*/
+        flex-basis: auto;/*项目原尺寸*/
+    }
+    ```
+    > 笔记：
+    1.
+    
+    
