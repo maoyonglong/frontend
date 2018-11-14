@@ -30,3 +30,24 @@
     > 1.方法一的原理是在容器的子元素后面生成伪元素，然后让这个伪元素清除浮动
     > 2.方法二的原理是形成BFC，BFC会计算浮动元素的高度。其中，BFC是“块级格式化上下文”，把它理解成独立的一个块、一个空间（类似div）即可。但是，这个块比较特殊，它具有不会被浮动元素覆盖和计算容器中浮动元素高度的特点。
     > 3.形成BFC的方式是：脱离文档流，变成行内块级元素和溢出隐藏三种方式。
+    * ######浮动元素与兄弟元素
+    浮动元素是否遮盖非浮动兄弟元素取决于该兄弟元素的类别（是否是块级元素）和在dom树（文档）中的顺序。
+    ```html
+    <div class="left">left</div>
+    <div class="normal">normal</div>
+    <div class="right">right</div>
+    ```
+    ```css
+    div{
+        background-color: red;
+        border: 1px solid black;
+    }
+    .left{
+        float: left;
+    }
+    .right{
+        float: right;
+    }
+    ```
+    上面代码的结果是
+    ![sibling-float-1](./imgs/sibling-float-1.jpg)
