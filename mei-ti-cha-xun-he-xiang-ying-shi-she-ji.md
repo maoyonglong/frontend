@@ -4,9 +4,9 @@
 * #####简要说明
 媒体查询是指使用css3新增的@media指令来判断媒体类型和屏幕宽度等设备和浏览器信息，来选择性的应用样式或者样式表。
 * #####使用方法
-    * 基本语法
-        [css媒体查询](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries)
-    * 切换样式表
+    * ######基本语法
+    [css媒体查询](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries)
+    * ######切换样式表
     ```html
     <link rel="stylesheet" src="mobile.css" media="screen and (max-device-width=480px)" />
     <link rel="stylesheet" src="computer.css" media="screen and (max-device-width=1920px)" />
