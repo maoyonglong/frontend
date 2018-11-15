@@ -17,3 +17,7 @@
         ...
     }
     ```
+* #####补充
+媒体查询不兼容低版本浏览器（IE9-），如果需要兼容这些浏览器，可以使用js解决。可以使用[css3-mediaqueries.js](http://code.google.com/p/css3-mediaqueries-js/)解决。
+
+##二、响应式设计
