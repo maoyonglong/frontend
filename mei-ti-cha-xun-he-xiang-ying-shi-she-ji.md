@@ -11,4 +11,9 @@
     <link rel="stylesheet" src="mobile.css" media="screen and (max-device-width=480px)" />
     <link rel="stylesheet" src="computer.css" media="screen and (max-device-width=1920px)" />
     ```
-    * 
+    * ######切换样式
+    ```css
+    @media (max-width: 700px){
+        ...
+    }
+    ```
