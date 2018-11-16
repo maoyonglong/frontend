@@ -51,6 +51,7 @@
     ```
     上面代码的结果是
     ![sibling-float-1](./imgs/sibling-float-1.jpg)
+    <br />
     其中normal被left遮盖
     
     > 笔记：
