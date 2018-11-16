@@ -35,5 +35,51 @@
 }
 ```
 ```js
-if()
+// 获取屏幕可视区域宽度
+var clientWidth = document.documentElement.clientWidth;
+// 根据宽度决定载入图片的尺寸
+if(clientWidth > 768){
+    // img是图片dom元素
+    img.src = "large-img.jpg";
+}else{
+    img.src = "small-img.jpg";
+}
+```
+> 笔记：
+1. 有时为了兼容IE，由于低版本IE不支持max-width，只能使用`width: 100%`设置流体图片的宽度,这时，可以添加js来切换样式。
+
+```js
+        /判断是否是IE浏览器，包括Edge浏览器
+     function IEVersion()
+     {
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+		var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
+        if(isIE)
+        {
+             var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+             reIE.test(userAgent);
+             var fIEVersion = parseFloat(RegExp["$1"]);
+             if(fIEVersion == 7)
+             { return "IE7";}
+             else if(fIEVersion == 8)
+             { return "IE8";}
+             else if(fIEVersion == 9)
+             { return "IE9";}
+             else if(fIEVersion == 10)
+             { return "IE10";}
+             else if(fIEVersion == 11)
+             { return "IE11";}
+             else
+             { return "0"}//IE版本过低
+        }
+		else if(isEdge)
+		{
+			return "Edge";
+		}
+        else
+        {
+            return "-1";//非IE
+        }
+     }    
 ```
