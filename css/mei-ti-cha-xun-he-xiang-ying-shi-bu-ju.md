@@ -49,37 +49,35 @@ if(clientWidth > 768){
 1. 有时为了兼容IE，由于低版本IE不支持max-width，只能使用`width: 100%`设置流体图片的宽度,这时，可以添加js来切换样式。
 
 ```js
-        /判断是否是IE浏览器，包括Edge浏览器
-     function IEVersion()
-     {
-        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
-		var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
-        if(isIE)
-        {
-             var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-             reIE.test(userAgent);
-             var fIEVersion = parseFloat(RegExp["$1"]);
-             if(fIEVersion == 7)
-             { return "IE7";}
-             else if(fIEVersion == 8)
-             { return "IE8";}
-             else if(fIEVersion == 9)
-             { return "IE9";}
-             else if(fIEVersion == 10)
-             { return "IE10";}
-             else if(fIEVersion == 11)
-             { return "IE11";}
-             else
-             { return "0"}//IE版本过低
-        }
-		else if(isEdge)
-		{
-			return "Edge";
-		}
-        else
-        {
-            return "-1";//非IE
-        }
-     }    
+//判断是否是IE浏览器
+function IEVersion(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isEdge = userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
+    if(isIE){
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        return fIEVersion;
+    }else{
+        return false;
+    }
+}
+// 切换样式
+if(IEVersion() < 8){
+    img.style.width = "100%";
+}
 ```
+> 2.可以使用相应的js插件解决问题，比如[responsive-images.js](https://github.com/kvendrik/responsive-images.js)
+> 3.除了使用百分比和max-width等属性以外，让元素依据内容自适应也是常用的方法，这时，可以加上margin，padding等微调布局。
+
+* 响应式布局的步骤
+    * ######在html文档的添加下面元信息标签
+    ```html
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    ``` 
+    * ######选择一个设计稿，完成布局
+    一般选择最大或最小的设计稿作为最初的布局对象。如果只考虑移动端和PC端，这个选择就是移动端优先和PC端优先的选择。因为这是你希望完美实现最初的设计稿，而其它设计稿可能在其基础上需要添加微调，而且也不一定能完全还原设计稿效果。
+    * ######在基本html上调整和修改样式
+    将依据初稿完成的html在浏览器不同设备屏幕上调试，依据相应设计稿调整和修改样式。当然，这里每个设计稿对应这个媒体查询范围。
+
