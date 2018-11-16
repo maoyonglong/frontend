@@ -77,6 +77,7 @@
     ```
     结果为：
     ![sibling-float-2](./imgs/sibling-float-2.jpg)
+    <br />
     其中left不遮盖normal，normal的宽度自适应为100%减去left的宽度。
     
     >笔记：
