@@ -35,7 +35,7 @@ el.id = 'newId'; // 设置元素id属性
 ```
 
 ## 三、操作元素class
-* className方式
+* ### className方式
 获取class
 ```js
 var className = el.className;
@@ -45,28 +45,92 @@ var className = el.className;
 el.className += ' <newClass>';
 ```
 删除等操作也是对className字符串的操作，这里省略。
-* classList方式
+* ### classList方式
 获取class数组
 ```js
 var classList = el.classList;
 ```
 添加class
 ```js
-el.classList.add(<newClass>);
+el.classList.add('<newClass>');
 ```
 删除class
 ```js
-el.classList.remove(<class>);
+el.classList.remove('<class>');
 ```
 是否包含某个class
 ```js
-el.classList.contains(<class>);
+el.classList.contains('<class>');
 ```
 切换class
 ```js
-el.classList.toggle(<class>);
+el.classList.toggle('<class>');
 ```
-class的索引
+按索引访问class
 ```
-el.classList.item(<class>);
+el.classList.item('<idx>');
 ```
+## 四、操作dataset
+html5新增了data-*的自定义属性方式。
+定义方式
+```html
+<div id="demo" data-myData="myData"></div>
+```
+获取dataset定义的数据
+```js
+var el = document.getElmentById('demo');
+var myData = el.dataset.myData;
+```
+## 五、操作style
+js访问css属性时，使用驼峰命名方式访问<br />
+获取style
+```js
+var backgroundColor = el.style.backgroundColor;
+```
+设置style
+```js
+el.style.backgroundColor = '#000';
+```
+## 六、创建、插入和移除dom
+创建dom
+```js
+var el = document.createElment('<tag>');
+```
+插入dom
+```js
+parent.appendChild(el); // 将dom插入到容器的最后面
+parent.insertBefore(el, child); // 将dom插入到容器某个子元素的前面
+```
+移除dom
+```js
+parent.removeChild(el); // 移除容器的el子元素
+```
+# 七、操作dom结点属性
+获取结点内容
+```js
+var text = el.innerText; // 获取结点的文本内容
+var html = el.innerHTML; // 获取结点中的dom内容
+```
+获取结点名称
+```js
+var nodeName = el.nodeName;
+```
+获取结点值
+```js
+var nodeValue = el.nodeValue;
+```
+获取结点类型
+```js
+var nodeType = el.nodeType;
+```
+获取父节点
+```js
+var parentNode = el.parentNode;
+```
+获取子结点
+```js
+var childNodes = el.childNodes;
+```
+> 笔记：
+> nodeType、nodeName可以用于判断标签类型
+## 八、操作表单元素
