@@ -133,4 +133,5 @@ var childNodes = el.childNodes;
 ```
 > 笔记：
 > nodeType、nodeName可以用于判断标签类型
+
 ## 八、操作表单元素
