@@ -5,3 +5,16 @@
 ```js
 var el = document.getElmentById('id');
 ```
+依据class获取元素
+```js
+var els = document.getElementsByClassName('class');
+```
+依据标签名获取元素
+```js
+var els = document.getElementsByTagName('tag');
+```
+依据选择器获取元素
+```js
+var el = document.querySelector('selector');
+var els = document.querySelectorAll('selector');
+```
