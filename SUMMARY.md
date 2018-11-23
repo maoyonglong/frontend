@@ -9,7 +9,9 @@
   * [浮动布局和定位布局](css/fu-dong-bu-ju-he-ding-wei-bu-ju.md)
   * [媒体查询和响应式布局](css/mei-ti-cha-xun-he-xiang-ying-shi-bu-ju.md)
   * [移动端布局](css/yi-dong-duan-bu-ju.md)
-  * [css命名规范](css/cssming-ming-gui-fan.md)
 * [js](js.md)
   * [操作dom](js/cao-zuo-dom.md)
+  * [正则表达式](js/zheng-ze-biao-da-shi.md)
+  * [操作BOM](js/cao-zuo-bom.md)
+  * [ES6新特性](js/es6xin-te-xing.md)
 
