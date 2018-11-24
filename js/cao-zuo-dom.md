@@ -190,4 +190,5 @@ attrNode.nodeValue=<value>; // 设置属性结点的结点值
 el.attributes.setNamedItem(attrNode); // 设置元素的属性结点
 ```
 > 笔记：
-> 除了使用getNamedItem等方法外，attributes属性也可以使用`[]`操作符访问和赋值。
+> 1. 除了使用getNamedItem等方法外，attributes属性也可以使用`[]`操作符访问和赋值。
+> 2. 一般而言，attributes属性并不常用，除非要遍历一个元素结点中所有的特性时才会用到。
