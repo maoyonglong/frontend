@@ -144,5 +144,11 @@ var childNodes = el.childNodes;
 > nodeType、nodeName可以用于判断标签类型
 
 ## 八、操作文档信息
-document
+document对象可以操控部分文档相关信息。
+```js
+var title = document.title; // 文档标题
+var url = document.URL; // 文档url
+var domain = document.domain; // 文档域名
+var referrer = document.referrer; // 返回载入当前文档的来源文档的URL
+```
 
