@@ -143,7 +143,7 @@ var childNodes = el.childNodes;
 > 笔记：
 > nodeType、nodeName可以用于判断标签类型
 
-## 八、操作文档信息
+## 八、文档信息
 document对象可以操控部分文档相关信息。
 ```js
 var title = document.title; // 文档标题
@@ -164,3 +164,30 @@ document.domain = 'wrox.com'; // 松散的
 document.domain = 'p2p.wrox.com'; // 紧绷的
 ```
 
+## 九、特殊集合
+document对象具有一些特殊的集合，支持快速访问页面某些元素
+```js
+document.anchors // 返回所有带name的a标签
+document.links // 返回所有带href的a标签
+document.forms // 返回所有的form标签
+document.images // 返回所有的img标签 
+```
+
+## 十、操作特性
+除了直接使用点运算符访问结点特性外，还可以使用getAttribute等属性操作特性。
+```js
+el.getAttribute('<attr>'); // 获取特性值
+el.setAttribute('<attr>', <value>); // 设置特性
+el.removeAttribute('<attr>'); // 移除特性 
+```
+除了上面常见的用法外，元素还存在attributes属性，它是元素结点中的所有属性结点的集合。
+```js
+el.attributes.getNamedItem('<attr>').nodeValue; // 获取属性结点的结点值
+el.attributes.removeNamedItem('<attr>'); // 移除属性结点
+// 添加属性结点
+var attrNode = document.createAttribute('<attr>'); // 创建属性结点
+attrNode.nodeValue=<value>; // 设置属性结点的结点值 
+el.attributes.setNamedItem(attrNode); // 设置元素的属性结点
+```
+> 笔记：
+> 除了使用getNamedItem等方法外，attributes属性也可以使用`[]`操作符访问和赋值。
