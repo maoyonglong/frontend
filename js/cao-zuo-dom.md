@@ -91,7 +91,7 @@ var backgroundColor = el.style.backgroundColor;
 ```js
 el.style.backgroundColor = '#000';
 ```
-## 六、创建、插入和移除dom
+## 六、创建、插入、替换、复制和移除dom
 创建dom
 ```js
 var el = document.createElment('<tag>');
@@ -99,7 +99,16 @@ var el = document.createElment('<tag>');
 插入dom
 ```js
 parent.appendChild(el); // 将dom插入到容器的最后面
-parent.insertBefore(el, child); // 将dom插入到容器某个子元素的前面
+parent.insertBefore(newEl, exsitedEl); // 将dom插入到容器某个子元素的前面
+```
+替换dom
+```js
+parent.replaceChild(newEl, oldEl);
+```
+复制dom
+```js
+el.cloneNode(false); // 浅拷贝，只复制当前结点
+el.cloneNode(true); // 深拷贝，复制当前结点及其子孙结点
 ```
 移除dom
 ```js
@@ -134,4 +143,6 @@ var childNodes = el.childNodes;
 > 笔记：
 > nodeType、nodeName可以用于判断标签类型
 
-## 八、操作表单元素
+## 八、操作文档信息
+document
+
