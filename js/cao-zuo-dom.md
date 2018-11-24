@@ -151,4 +151,16 @@ var url = document.URL; // 文档url
 var domain = document.domain; // 文档域名
 var referrer = document.referrer; // 返回载入当前文档的来源文档的URL
 ```
+> 笔记：
+> domain可以被设置，可以用于解决内嵌框架跨域问题。
+> 比如，一个页面的domain为www.wrox.com，而内嵌页面为www.p2p.wrox.com
+这样把两个页面的domain都设置为wrox.com可以解决跨域。
+```js
+document.domain = 'wrox.com';
+```
+> 值得注意的是：松散的domain不能设置成紧绷的domain
+```js
+document.domain = 'wrox.com'; // 松散的
+document.domain = 'p2p.wrox.com'; // 紧绷的
+```
 
