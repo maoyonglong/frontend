@@ -130,6 +130,7 @@ function getQueryArgs(){
             args[key] = value;
         }
     }
+    return args;
 }
 ```
 > 笔记：
