@@ -97,3 +97,40 @@ if(ans !== null){
     console.log('关闭窗口返回null');
 }
 ```
+## 三、location对象
+location对象保存地址和导航等相关属性和方法，它是window对象的一个属性。
+以https://www.bilibili.com/video/av32433036为例
+```js
+location.href // 完整url,"https://www.bilibili.com/video/av32433036"
+location.protocol // 协议，"https:"
+location.host // 域名加端口号，"www.bilibili.com"
+location.hostname // 域名，"www.bilibili.com"
+location.port // 端口号，""
+location.pathname // 目录，"/video/av32433036"
+location.hash // 哈希#，""
+location.search // 查询字符串，""
+```
+> 笔记：
+> 1. 如果是默认端口80，那么port为""。
+> 2. 查询字符串是指?q=123等以问号开头的部分。
+
+获取查询字段脚本
+```js
+function getQueryArgs(){
+    var qs = location.search;
+    qs = qs.length > 0 ? qs.substring(1) : ''; // 查询字符串
+    var args = {}; // 保存字段的对象
+    var items = args.split('&'); // 获得每一项key=value
+    for(var i = 0, len = items.length; i < len; i++){
+        var tmp = items[i].split('=');
+        var key = decodeURLComponent(tmp[0]); 
+        var value = decodeURLComponent(tmp[1]); 
+        // 如果key存在
+        if(key.length > 0){
+            args[key] = value;
+        }
+    }
+}
+```
+> 笔记：
+> 获取查询字符串的内容需要使用decodeURLComponent方法进行解码。
