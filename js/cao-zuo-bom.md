@@ -74,12 +74,26 @@ try{
 }
 ```
 * ### 对话框
-浏览器内置的对话框有alert、confirm和prompt三种。
+浏览器内置的对话框主要有alert、confirm和prompt三种。而find和print对话框并不常用，这里介绍。
 alert警告框
 ```js
 alert(<msg>);
 ```
 确定框
 ```js
-var 
+var flag = confirm('<ques>');
+if(flag){
+    console.log('单击Ok会返回true');
+}else{
+    console.log('关闭窗口会返回false');
+}
+```
+提示输入框
+```js
+var ans = prompt('<ques>', '<tipAns>');
+if(ans !== null){
+    console.log('输入的文本是：' + ans);
+}else{
+    console.log('关闭窗口返回null');
+}
 ```
