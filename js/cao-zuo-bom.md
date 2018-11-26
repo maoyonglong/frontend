@@ -135,3 +135,5 @@ function getQueryArgs(){
 ```
 > 笔记：
 > 获取查询字符串的内容需要使用decodeURLComponent方法进行解码。
+
+## 四、screen对象

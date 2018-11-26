@@ -15,3 +15,7 @@
   * [操作BOM](js/cao-zuo-bom.md)
   * [ES6新特性](js/es6xin-te-xing.md)
 
+## html5
+
+* [拖拽](html5/tuo-ye.md)
+
