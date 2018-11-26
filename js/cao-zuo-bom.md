@@ -114,7 +114,7 @@ location.search // 查询字符串，""
 > 1. 如果是默认端口80，那么port为""。
 > 2. 查询字符串是指?q=123等以问号开头的部分。
 
-获取查询字段脚本
+* 获取查询字段脚本
 ```js
 function getQueryArgs(){
     var qs = location.search;
@@ -135,5 +135,23 @@ function getQueryArgs(){
 ```
 > 笔记：
 > 获取查询字符串的内容需要使用decodeURLComponent方法进行解码。
+* 获取位置信息
 
-## 四、screen对象
+## 五、screen对象
+screen对象保存与浏览器屏幕相关的信息。一般只在改变弹窗大小时使用。
+改变弹窗大小
+```js
+window.resizeTo(screen.availWidth, screen.availHeight);
+```
+> 笔记：
+> 有时，需要获取整个屏幕的宽高，这时，需要使用screen.width和screen.height
+
+## 六、history对象
+history对象保存与浏览器历史记录相关的属性和方法。
+```js
+history.go(<idx>|<url>); // 前进（正）或后退（负）、
+跳转到最近相应页面
+history.back(); // 后退
+history.forward(); // 前进
+history.length; // 历史记录条数
+```
