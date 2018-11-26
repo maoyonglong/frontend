@@ -114,7 +114,7 @@ location.search // 查询字符串，""
 > 1. 如果是默认端口80，那么port为""。
 > 2. 查询字符串是指?q=123等以问号开头的部分。
 
-获取查询字段脚本
+* ######获取查询字段脚本
 ```js
 function getQueryArgs(){
     var qs = location.search;
@@ -135,3 +135,91 @@ function getQueryArgs(){
 ```
 > 笔记：
 > 获取查询字符串的内容需要使用decodeURLComponent方法进行解码。
+* ######浏览器位置操作
+页面跳转可以通过location.assign()和location.replace()方法或者设置相关属性实现。
+```js
+// 方法
+location.assign('<url>'); // 载入新文档
+location.replace('<url>'); // 载入新文档
+location.reload(); // 重载当前文档（可能从浏览器缓存中加载）
+location.reload(true); // 重载当前文档（从服务器中加载） 
+// 属性
+location.href = '<url>';
+location.hash = '<newHash>';
+... // 其它能改变url的属性
+```
+> 笔记：
+>  assign、href造成的跳转和replace造成的跳转的不同之处是前者保留当前页面的历史记录；而后者不保留，更换成新的url作为历史记录条目。
+
+## 四、navigator对象
+navigator对象保存着浏览器相关类型信息。比如浏览器版本、userAgent。
+* ######检测插件
+```js
+// 非IE
+// 非IE浏览器具有navigator.plugins属性
+function hasPlugin(name){
+    name = name.toLowerCase();
+    var plugins = navigator.plugins;
+    for(var i = 0; i < plugins.length; i++){
+        var curPlugin = plugins[i];
+        var curPluginName = curPlugin.name.toLowerCase();
+        if(curPluginName.indexOf(name) >= 0){
+            return true;
+        }
+    }
+    return false;
+}
+alert(hasPlugin('Flash'));
+// IE
+// IE不具备navigator.plugins属性，它的插件使用COM对象实现的，需要用插件的COM对象唯一标识符识别。
+function hasIEPlugin(name){
+    try{
+        new ActiveObject(name); // 尝试创建一个插件实例
+        return true;
+    }catch(e){
+        return false;
+    }
+}
+alert(hasIEPlugin('ShockwaveFlash.ShockwaveFlash'));
+```
+> 笔记：
+> 1. 可以发现IE和其它浏览器检测插件的形式相差甚远，所以一般检测特定插件而不是通用插件的脚本比较实用，比如：
+> ```js
+    function hasFlash(){
+        var result = hasPlugin('Flash');
+        if(!result){
+            result = hasIEPlugin('ShockwaveFlash.ShockwaveFlash');
+        }
+        return result;
+    }
+```
+
+* ######注册处理程序
+navigator对象新增的registerContentHandler和registerPrototcolHandler方法一个站点处理特定类型（MIME）的信息。
+```js
+// 指明处理rss的程序所在url及其名字
+navigator.registerContentHandler("application/rss+xml", '<url>', '<appName>');
+// 指明处理mailto协议的程序所在url及其名字
+navigator.registerPrototcolHandler("mailto", '<url>', '<appName>');
+```
+> 笔记：
+> 上面是注册处理程序常用场景：rss和电子邮件协议。
+
+## 五、screen对象
+screen对象保存与浏览器屏幕相关的信息。一般只在改变弹窗大小时使用。
+改变弹窗大小
+```js
+window.resizeTo(screen.availWidth, screen.availHeight);
+```
+> 笔记：
+> 有时，需要获取整个屏幕的宽高，这时，需要使用screen.width和screen.height
+
+## 六、history对象
+history对象保存与浏览器历史记录相关的属性和方法。
+```js
+history.go(<idx>|<url>); // 前进（正）或后退（负）、
+跳转到最近相应页面
+history.back(); // 后退
+history.forward(); // 前进
+history.length; // 历史记录条数
+```

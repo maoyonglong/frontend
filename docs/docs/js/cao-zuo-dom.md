@@ -192,3 +192,52 @@ el.attributes.setNamedItem(attrNode); // 设置元素的属性结点
 > 笔记：
 > 1. 除了使用getNamedItem等方法外，attributes属性也可以使用`[]`操作符访问和赋值。
 > 2. 一般而言，attributes属性并不常用，除非要遍历一个元素结点中所有的特性时才会用到。
+
+## 十一、插入动态脚本和动态样式
+动态加载外部脚本
+```js
+function loadExternalScript(url){
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    document.body.appendChild(script);
+}
+```
+动态加载内嵌脚本
+```js
+function loadInnerScript(code){
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    try{
+        script.appendChild(document.createTextNode(code));
+    }catch(e){
+        script.text = code; // ie，因为ie不能访问script的子节点
+    }
+    document.body.appendChild(script);
+}
+```
+动态加载外部样式表
+```js
+function loadExternalStyle(url){
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = url;
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(link);
+}
+```
+动态加载内部样式表
+```js
+function loadInnerStyle(code){
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    try{    
+        style.appendChild(document.createTextNode(code));
+    }catch(e){
+        style.cssText = code; // ie,原因与script一样
+    }
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(style);
+}
+```
