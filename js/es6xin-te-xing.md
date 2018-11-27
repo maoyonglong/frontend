@@ -164,4 +164,18 @@ console.log(f + '---' + g + '---' + h); // 1---2---2
 let [a, b=2, c] = [1, undefined, 3];
 console.log(a + '---' + b + '---' + c); // 1---2---3
 ```
-
+* 声明变量时使用解构赋值
+```js
+let a = 1;
+let b = 2;
+let obj = {a, b};
+console.log(obj); // {a: 1, b: 2}
+```
+* 在函数参数中使用解构赋值
+```js
+function func({a, b} = {'a', 'b'}){
+    console.log(a, b);
+}
+func({a: 1}); // 1 'b'
+```
+## 六、Promise
