@@ -74,6 +74,7 @@ The elements of arr are:
 * 标签模板 <br />
 标签其实是函数，而标签模板就是把模板字符串作为实参的一种特殊的函数调用。
 ```js
+// tag函数
 const transferHtml = function(iterals, ...substitution){
     let dict = {
         "&" : "&amp;",
@@ -83,11 +84,35 @@ const transferHtml = function(iterals, ...substitution){
     let result = "";
     let keys = Object.keys(dict);
     let re = new RegExp("["+keys.join("")+"]", "g");
-    substitution.forEach(function(item, idx){
+    for(let i = 0; i < substitution.length; i++){
+        let item = substitution[i];
+        result += iterals[i];
         result += item.replace(re, function(match){
             return dict[match];
         });
-    });
+    }
+    result += iterals[iterals.length-1];
     return result;
 };
+transferHtml`${'<p>pppp</p>'}`; // 调用标签模板
+// 结果："&lt;p&gt;pppp&lt;/p&gt;"
+```
+> 笔记：
+> 1. tag函数的iterals保存着模板标签被插值分割的字符串`（参考split）`，如果插值在字符串最后，那么iterals的最后一个值的空字符串`""`；而substitution是插值的集合，它不是数组类型，而是类数组类型`（参考substitution）`
+> 2. 如果需要把for循环代码改为substitution.forEach，那么substitution一定要使用`...`运算符展开这个类数组对象。
+
+## 三、箭头函数
+es6简化了函数的语法表示，一定程度上改善了函数调用时this指针指向多变的问题。
+* 声明方法
+```js
+const add = (arg1, arg2) => {
+    return arg1 + arg2;
+};
+/**等价于
+function add(arg1, arg2){
+    return arg1 + arg2;
+}
+*/
+// 如果函数体简单，并且存在返回值可以再简写。
+const add = (arg1, arg2) => arg1+arg2;
 ```
