@@ -52,3 +52,23 @@ console.log(message); // "10 items cost $2.50."
 > 笔记：
 > 1. 插值可以是js表达式。
 > 2. 当模板字符串中连续出现两个`$`符号，第一个符号表现为美元符号，不是插值。
+* 插值嵌套例子
+```js
+const arr = ['item1', 'item2'];
+let str = `
+    The elements of arr are: 
+    ${
+      arr.map(function(item, idx){
+          return `${idx+1}、${item}`;
+      }).join('\n')
+    }
+`
+console.log(str);
+/**
+"
+The elements of arr are:
+1、item1
+2、item2"
+*/
+```
+* 标签模板
