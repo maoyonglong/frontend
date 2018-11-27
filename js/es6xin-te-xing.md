@@ -113,6 +113,34 @@ function add(arg1, arg2){
     return arg1 + arg2;
 }
 */
-// 如果函数体简单，并且存在返回值可以再简写。
-const add = (arg1, arg2) => arg1+arg2;
+// 如果函数体简单，并且存在返回值可以再简写：
+// const add = (arg1, arg2) => arg1+arg2;
+```
+* this指向 <br />
+箭头函数的this指向声明它时所在的对象作用域（全局作用域是global对象的作用域）。
+```js
+const func = () => { console.log(this); };
+const obj = {};
+func.call(obj); // window（浏览器环境下）
+```
+> 笔记：
+> 1. 箭头函数的this和调用对象无关（call、apply失效），只有声明时所在作用域有关。
+> 2. 箭头函数没有arguments对象，可以用rest参数代替
+> 3. 箭头函数不能作为构造函数
+> 4. 箭头函数不能使用yield
+
+## 四、函数参数默认值和rest参数
+es6允许函数使用参数默认值，rest参数用于将参数转成数组。
+```js
+// 默认值
+const func1 = (arg="arg") => {
+    console.log(arg);
+};
+func1(); // "arg"
+func1("arg1"); // "arg1"
+// rest参数
+const func2 = (...args) => {
+    console.log(args);
+};
+func2(1,2,3); // [1, 2, 3];
 ```
