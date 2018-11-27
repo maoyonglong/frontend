@@ -41,7 +41,7 @@ let str = `
 ```
 > 笔记：
 > 模板字符串使用`${}`插入变量，为了方便记忆，我简单把它叫做插值。
-* 表达式插值例子
+* 表达式插值例子 <br />
 插值不仅仅支持变量，可以是一般的js表达式。
 ```js
 let count = 10;
@@ -52,3 +52,26 @@ console.log(message); // "10 items cost $2.50."
 > 笔记：
 > 1. 插值可以是js表达式。
 > 2. 当模板字符串中连续出现两个`$`符号，第一个符号表现为美元符号，不是插值。
+* 插值嵌套例子
+```js
+let obj = {name: 'Mike', job: 'teacher'};
+let str = `
+    The innerStr is:
+    ${
+        (function({name, job}){
+            return `${name} is a ${job}`
+        })(obj)
+    }
+`;
+/** str:
+The innerStr is:
+Mike is a teacher
+*/
+```
+* 标签模板 <br />
+标签模板实际上是将模板字符串作为参数，然后标签是函数，然后进行函数调用的一种形式。
+```js
+const safeHtml = (literals, ...values) => {
+    d
+}
+```
