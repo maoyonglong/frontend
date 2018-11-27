@@ -41,7 +41,7 @@ let str = `
 ```
 > 笔记：
 > 模板字符串使用`${}`插入变量，为了方便记忆，我简单把它叫做插值。
-* 表达式插值例子
+* 表达式插值例子 <br />
 插值不仅仅支持变量，可以是一般的js表达式。
 ```js
 let count = 10;
@@ -71,4 +71,23 @@ The elements of arr are:
 2、item2"
 */
 ```
-* 标签模板
+* 标签模板 <br />
+标签其实是函数，而标签模板就是把模板字符串作为实参的一种特殊的函数调用。
+```js
+const transferHtml = function(iterals, ...substitution){
+    let dict = {
+        "&" : "&amp;",
+        "<" : "&lt;",
+        ">" : "&gt;"
+    };
+    let result = "";
+    let keys = Object.keys(dict);
+    let re = new RegExp("["+keys.join("")+"]", "g");
+    substitution.forEach(function(item, idx){
+        result += item.replace(re, function(match){
+            return dict[match];
+        });
+    });
+    return result;
+};
+```
