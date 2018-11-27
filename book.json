@@ -1,11 +1,3 @@
 {
-	"plugins": ["toggle-chapters", "-search", "-lunr", "docsearch"],
-	"pluginsConfig": {
-     "docSearch": {
-       "apiKey" : "replace_with_algolia_doc_search_api_key",
-       "index" : "replace_with_algolia_doc_search_index",
-        "logo" : "logo.png",
-        "brandUrl" : "https://uilicious.com/"
-     }
-	}
+	"plugins": ["toggle-chapters"]
 }
