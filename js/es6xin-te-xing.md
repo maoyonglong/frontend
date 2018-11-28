@@ -179,3 +179,96 @@ function func({a, b} = {'a', 'b'}){
 func({a: 1}); // 1 'b'
 ```
 ## 六、Promise
+Promise对象可以将异步编程（特别是ajax）变成链式调用形式，更具可读性和可维护性。
+* 简单getJSON函数的封装
+```js
+const getJSON = (url) => {
+    return new Promise(function(resolve, reject){ // 执行函数
+        const xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttp.open('GET', url, true);
+        xmlHttp.send();
+	    xmlHttp.onreadystatechange=function(){
+		    if (xmlHttp.readyState==4 && xmlHttp.status==200){
+		        try{
+		            let response = JSON.parse(xmlHttp.responseText);
+			        resolve(xmlHttp.response); // 
+		        }catch(e){
+		            reject(e);
+		        }
+		    }else{
+		        reject(new Error(xmlHttp.statusText)));
+		    }
+	    }
+    }).
+    // 执行函数代码正常时进行后续处理
+    then(function(res){
+        console.log(res);
+    }).
+    // 执行函数代码错误时进行的后续错误处理
+    catch(function(e){
+        console.log(e);
+    });
+}
+```
+> 笔记：
+> 1. promise对象在创建时立即执行执行函数，立即执行函数用于分配任务，在执行函数中调用resolve（）和reject()函数，将分别触发then和catch函数任务。
+> 2. then和catch执行完成会返回一个新的Promise对象实例，故可以链式调用。
+* 已决或已拒绝Promise对象
+```js
+// 已决Promise
+let promise1 = Promise.resolve(<param>);
+// 已拒绝Promise
+let promise2 = Promise.reject(<param>);
+// 已决定了执行后状态的Promise可以直接调用then或者catch
+promise1.then(function(param){
+    console.log(param);
+});
+promise2.catch(function(param){
+    console.log(param);
+});
+```
+* 非Promise的Thenable对象
+```js
+/** 
+当一个非Promise对象拥有一个能接受 resolve 与 reject 参数的 then() 方法，这个对象被称为非Promise的Thenable对象；
+它能被Promise.resolve和Promise.reject方法调用。
+*/
+let thenable1 = {
+    then: function(resolve, reject) {
+        resolve('resolve');
+    }
+};
+let thenable2 = {
+    then: function(resolve, reject) {
+        reject('reject');
+    }
+};
+let t1 = Promise.resolve(thenable1); // 'resolve'
+t1.then(function(value){
+    console.log(value);
+});
+let t2 = Promise.resolve(thenable2); // 'reject'
+t2.catch(function(value){
+    console.log(value);
+});
+```
+* 串行Promise
+```js
+/**
+    then方法可以连续多个，使用return返回值进行参数传递
+*/
+let p1 = new Promise(function(resolve, reject) {
+    resolve(42);
+});
+p1.then(function(value) {
+    console.log(value); // 42
+    return value + 1; // 传递到下一个then的参数
+}).then(function(value) {
+    console.log(value); // 43
+});
+```
+* ###多Promise对象处理
+* promise.all()
+```js
+
+```
