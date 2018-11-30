@@ -213,6 +213,7 @@ const getJSON = (url) => {
 > 笔记：
 > 1. promise对象在创建时立即执行执行函数，立即执行函数用于分配任务，在执行函数中调用resolve（）和reject()函数，将分别触发then和catch函数任务。
 > 2. then和catch执行完成会返回一个新的Promise对象实例，故可以链式调用。
+> 3. 如果执行函数或者then方法抛出异常，catch方法可以捕获异常并且执行
 * 已决或已拒绝Promise对象
 ```js
 // 已决Promise
@@ -268,7 +269,44 @@ p1.then(function(value) {
 });
 ```
 * ###多Promise对象处理
-* promise.all()
+* Promise.all() <br />
+使用Promise处理异步操作时，当一个异步操作需要在多个异步操作执行完成后执行，那么可以使用Promise对象all表示这种逻辑。
 ```js
-
+let p1 = new Promise(function(resolve, reject) {
+    resolve(42);
+});
+let p2 = new Promise(function(resolve, reject) {
+    resolve(43);
+});
+let p3 = new Promise(function(resolve, reject) {
+    resolve(44);
+});
+let p4 = Promise.all([p1, p2, p3]);
+// p4在p1、p2、p3都执行完才执行
+p4.then(function(value) {
+    console.log(Array.isArray(value)); // true
+    console.log(value[0]); // 42
+    console.log(value[1]); // 43
+    console.log(value[2]); // 44
+});
 ```
+* Promise.race <br />
+类似all方法，如果需要表示一个Promise在多个Promise对象中存在一个执行完成才执行的逻辑，可以使用Promise对象的race方法。
+```js
+let p1 = new Promise(function(resolve, reject) {
+    resolve(42);
+});
+let p2 = new Promise(function(resolve, reject) {
+    resolve(43);
+});
+let p3 = new Promise(function(resolve, reject) {
+    resolve(44);
+});
+let p4 = Promise.race([p1, p2, p3]);
+// p4在p1、p2、p3中的一个执行完才执行
+p4.then(function(value) {
+    console.log(value); // 42
+});
+```
+> 笔记：
+> all和race创建的Promis都会在一个Promise返回拒绝状态时，立即执行，并呈现拒绝状态，执行catch方法，而不需要等待其它Promise的执行。
