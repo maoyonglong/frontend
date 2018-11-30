@@ -310,3 +310,6 @@ p4.then(function(value) {
 ```
 > 笔记：
 > all和race创建的Promis都会在一个Promise返回拒绝状态时，立即执行，并呈现拒绝状态，执行catch方法，而不需要等待其它Promise的执行。
+
+## 七、类
+es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
