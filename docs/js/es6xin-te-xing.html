@@ -523,8 +523,141 @@ rest&#x53C2;&#x6570;&#x4F7F;&#x7528;<code>...</code>&#x64CD;&#x4F5C;&#x7B26;&#x6
 func({a: <span class="hljs-number">1</span>}); <span class="hljs-comment">// 1 &apos;b&apos;</span>
 </code></pre>
 <h2 id="&#x516D;&#x3001;promise">&#x516D;&#x3001;Promise</h2>
+Promise&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x5C06;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#xFF08;&#x7279;&#x522B;&#x662F;ajax&#xFF09;&#x53D8;&#x6210;&#x94FE;&#x5F0F;&#x8C03;&#x7528;&#x5F62;&#x5F0F;&#xFF0C;&#x66F4;&#x5177;&#x53EF;&#x8BFB;&#x6027;&#x548C;&#x53EF;&#x7EF4;&#x62A4;&#x6027;&#x3002;</li>
+<li>&#x7B80;&#x5355;getJSON&#x51FD;&#x6570;&#x7684;&#x5C01;&#x88C5;<pre><code class="lang-js"><span class="hljs-keyword">const</span> getJSON = (url) =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>)</span>{ <span class="hljs-comment">// &#x6267;&#x884C;&#x51FD;&#x6570;</span>
+      <span class="hljs-keyword">const</span> xmlHttp = <span class="hljs-built_in">window</span>.XMLHttpRequest ? <span class="hljs-keyword">new</span> XMLHttpRequest() : <span class="hljs-keyword">new</span> ActiveXObject(<span class="hljs-string">&quot;Microsoft.XMLHTTP&quot;</span>);
+      xmlHttp.open(<span class="hljs-string">&apos;GET&apos;</span>, url, <span class="hljs-literal">true</span>);
+      xmlHttp.send();
+      xmlHttp.onreadystatechange=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+          <span class="hljs-keyword">if</span> (xmlHttp.readyState==<span class="hljs-number">4</span> &amp;&amp; xmlHttp.status==<span class="hljs-number">200</span>){
+              <span class="hljs-keyword">try</span>{
+                  <span class="hljs-keyword">let</span> response = <span class="hljs-built_in">JSON</span>.parse(xmlHttp.responseText);
+                  resolve(xmlHttp.response); <span class="hljs-comment">// </span>
+              }<span class="hljs-keyword">catch</span>(e){
+                  reject(e);
+              }
+          }<span class="hljs-keyword">else</span>{
+              reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(xmlHttp.statusText)));
+          }
+      }
+  }).
+  <span class="hljs-comment">// &#x6267;&#x884C;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x6B63;&#x5E38;&#x65F6;&#x8FDB;&#x884C;&#x540E;&#x7EED;&#x5904;&#x7406;</span>
+  then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>)</span>{
+      <span class="hljs-built_in">console</span>.log(res);
+  }).
+  <span class="hljs-comment">// &#x6267;&#x884C;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x9519;&#x8BEF;&#x65F6;&#x8FDB;&#x884C;&#x7684;&#x540E;&#x7EED;&#x9519;&#x8BEF;&#x5904;&#x7406;</span>
+  <span class="hljs-keyword">catch</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{
+      <span class="hljs-built_in">console</span>.log(e);
+  });
+}
+</code></pre>
+<blockquote>
+<p>&#x7B14;&#x8BB0;&#xFF1A;</p>
+<ol>
+<li>promise&#x5BF9;&#x8C61;&#x5728;&#x521B;&#x5EFA;&#x65F6;&#x7ACB;&#x5373;&#x6267;&#x884C;&#x6267;&#x884C;&#x51FD;&#x6570;&#xFF0C;&#x7ACB;&#x5373;&#x6267;&#x884C;&#x51FD;&#x6570;&#x7528;&#x4E8E;&#x5206;&#x914D;&#x4EFB;&#x52A1;&#xFF0C;&#x5728;&#x6267;&#x884C;&#x51FD;&#x6570;&#x4E2D;&#x8C03;&#x7528;resolve&#xFF08;&#xFF09;&#x548C;reject()&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x5206;&#x522B;&#x89E6;&#x53D1;then&#x548C;catch&#x51FD;&#x6570;&#x4EFB;&#x52A1;&#x3002;</li>
+<li>then&#x548C;catch&#x6267;&#x884C;&#x5B8C;&#x6210;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Promise&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#xFF0C;&#x6545;&#x53EF;&#x4EE5;&#x94FE;&#x5F0F;&#x8C03;&#x7528;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x6267;&#x884C;&#x51FD;&#x6570;&#x6216;&#x8005;then&#x65B9;&#x6CD5;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;catch&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x6355;&#x83B7;&#x5F02;&#x5E38;&#x5E76;&#x4E14;&#x6267;&#x884C;</li>
+</ol>
+</blockquote>
+</li>
+<li>&#x5DF2;&#x51B3;&#x6216;&#x5DF2;&#x62D2;&#x7EDD;Promise&#x5BF9;&#x8C61;<pre><code class="lang-js"><span class="hljs-comment">// &#x5DF2;&#x51B3;Promise</span>
+<span class="hljs-keyword">let</span> promise1 = <span class="hljs-built_in">Promise</span>.resolve(&lt;param&gt;);
+// &#x5DF2;&#x62D2;&#x7EDD;Promise
+let promise2 = Promise.reject(&lt;param&gt;);
+// &#x5DF2;&#x51B3;&#x5B9A;&#x4E86;&#x6267;&#x884C;&#x540E;&#x72B6;&#x6001;&#x7684;Promise&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8C03;&#x7528;then&#x6216;&#x8005;catch
+promise1.then(function(param){
+  console.log(param);
+});
+promise2.catch(function(param){
+  console.log(param);
+});
+</code></pre>
+</li>
+<li>&#x975E;Promise&#x7684;Thenable&#x5BF9;&#x8C61;<pre><code class="lang-js"><span class="hljs-comment">/** 
+&#x5F53;&#x4E00;&#x4E2A;&#x975E;Promise&#x5BF9;&#x8C61;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x80FD;&#x63A5;&#x53D7; resolve &#x4E0E; reject &#x53C2;&#x6570;&#x7684; then() &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x88AB;&#x79F0;&#x4E3A;&#x975E;Promise&#x7684;Thenable&#x5BF9;&#x8C61;&#xFF1B;
+&#x5B83;&#x80FD;&#x88AB;Promise.resolve&#x548C;Promise.reject&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x3002;
+*/</span>
+<span class="hljs-keyword">let</span> thenable1 = {
+  then: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+      resolve(<span class="hljs-string">&apos;resolve&apos;</span>);
+  }
+};
+<span class="hljs-keyword">let</span> thenable2 = {
+  then: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+      reject(<span class="hljs-string">&apos;reject&apos;</span>);
+  }
+};
+<span class="hljs-keyword">let</span> t1 = <span class="hljs-built_in">Promise</span>.resolve(thenable1); <span class="hljs-comment">// &apos;resolve&apos;</span>
+t1.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>)</span>{
+  <span class="hljs-built_in">console</span>.log(value);
+});
+<span class="hljs-keyword">let</span> t2 = <span class="hljs-built_in">Promise</span>.resolve(thenable2); <span class="hljs-comment">// &apos;reject&apos;</span>
+t2.catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>)</span>{
+  <span class="hljs-built_in">console</span>.log(value);
+});
+</code></pre>
+</li>
+<li>&#x4E32;&#x884C;Promise<pre><code class="lang-js"><span class="hljs-comment">/**
+  then&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x8FDE;&#x7EED;&#x591A;&#x4E2A;&#xFF0C;&#x4F7F;&#x7528;return&#x8FD4;&#x56DE;&#x503C;&#x8FDB;&#x884C;&#x53C2;&#x6570;&#x4F20;&#x9012;
+*/</span>
+<span class="hljs-keyword">let</span> p1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">42</span>);
+});
+p1.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(value); <span class="hljs-comment">// 42</span>
+  <span class="hljs-keyword">return</span> value + <span class="hljs-number">1</span>; <span class="hljs-comment">// &#x4F20;&#x9012;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;then&#x7684;&#x53C2;&#x6570;</span>
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(value); <span class="hljs-comment">// 43</span>
+});
+</code></pre>
+</li>
+<li><h3 id="&#x591A;promise&#x5BF9;&#x8C61;&#x5904;&#x7406;">&#x591A;Promise&#x5BF9;&#x8C61;&#x5904;&#x7406;</h3>
+</li>
+<li>Promise.all() <br>
+&#x4F7F;&#x7528;Promise&#x5904;&#x7406;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x5728;&#x591A;&#x4E2A;&#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x540E;&#x6267;&#x884C;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Promise&#x5BF9;&#x8C61;all&#x8868;&#x793A;&#x8FD9;&#x79CD;&#x903B;&#x8F91;&#x3002;<pre><code class="lang-js"><span class="hljs-keyword">let</span> p1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">42</span>);
+});
+<span class="hljs-keyword">let</span> p2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">43</span>);
+});
+<span class="hljs-keyword">let</span> p3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">44</span>);
+});
+<span class="hljs-keyword">let</span> p4 = <span class="hljs-built_in">Promise</span>.all([p1, p2, p3]);
+<span class="hljs-comment">// p4&#x5728;p1&#x3001;p2&#x3001;p3&#x90FD;&#x6267;&#x884C;&#x5B8C;&#x624D;&#x6267;&#x884C;</span>
+p4.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.isArray(value)); <span class="hljs-comment">// true</span>
+  <span class="hljs-built_in">console</span>.log(value[<span class="hljs-number">0</span>]); <span class="hljs-comment">// 42</span>
+  <span class="hljs-built_in">console</span>.log(value[<span class="hljs-number">1</span>]); <span class="hljs-comment">// 43</span>
+  <span class="hljs-built_in">console</span>.log(value[<span class="hljs-number">2</span>]); <span class="hljs-comment">// 44</span>
+});
+</code></pre>
+</li>
+<li>Promise.race <br>
+&#x7C7B;&#x4F3C;all&#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x8868;&#x793A;&#x4E00;&#x4E2A;Promise&#x5728;&#x591A;&#x4E2A;Promise&#x5BF9;&#x8C61;&#x4E2D;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x624D;&#x6267;&#x884C;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Promise&#x5BF9;&#x8C61;&#x7684;race&#x65B9;&#x6CD5;&#x3002;<pre><code class="lang-js"><span class="hljs-keyword">let</span> p1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">42</span>);
+});
+<span class="hljs-keyword">let</span> p2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">43</span>);
+});
+<span class="hljs-keyword">let</span> p3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+  resolve(<span class="hljs-number">44</span>);
+});
+<span class="hljs-keyword">let</span> p4 = <span class="hljs-built_in">Promise</span>.race([p1, p2, p3]);
+<span class="hljs-comment">// p4&#x5728;p1&#x3001;p2&#x3001;p3&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x5B8C;&#x624D;&#x6267;&#x884C;</span>
+p4.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(value); <span class="hljs-comment">// 42</span>
+});
+</code></pre>
+<blockquote>
+<p>&#x7B14;&#x8BB0;&#xFF1A;
+all&#x548C;race&#x521B;&#x5EFA;&#x7684;Promis&#x90FD;&#x4F1A;&#x5728;&#x4E00;&#x4E2A;Promise&#x8FD4;&#x56DE;&#x62D2;&#x7EDD;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x7ACB;&#x5373;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x5448;&#x73B0;&#x62D2;&#x7EDD;&#x72B6;&#x6001;&#xFF0C;&#x6267;&#x884C;catch&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x5176;&#x5B83;Promise&#x7684;&#x6267;&#x884C;&#x3002;</p>
+</blockquote>
 </li>
 </ul>
+<h2 id="&#x4E03;&#x3001;&#x7C7B;">&#x4E03;&#x3001;&#x7C7B;</h2>
+<p>es6&#x7684;&#x7C7B;&#x4F7F;&#x7528;class&#x5173;&#x952E;&#x5B57;&#x6765;&#x58F0;&#x660E;&#xFF0C;&#x5B83;&#x589E;&#x5F3A;&#x4E86;&#x539F;&#x578B;&#x7EE7;&#x627F;&#x65B9;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;extend&#x5173;&#x952E;&#x5B57;&#x6765;&#x58F0;&#x660E;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#xFF0C;&#x8FD8;&#x589E;&#x52A0;&#x4E86;&#x65B0;&#x7684;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;&#x3001;super&#x5173;&#x952E;&#x5B57;&#x7B49;&#x5185;&#x5BB9;&#x3002;</p>
 
                                 
                                 </section>
@@ -564,7 +697,7 @@ func({a: <span class="hljs-number">1</span>}); <span class="hljs-comment">// 1 &
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ES6新特性","level":"1.4.4","depth":2,"previous":{"title":"操作BOM","level":"1.4.3","depth":2,"path":"js/cao-zuo-bom.md","ref":"js/cao-zuo-bom.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"js/es6xin-te-xing.md","mtime":"2018-11-27T15:30:09.946Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-27T15:31:09.403Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ES6新特性","level":"1.4.4","depth":2,"previous":{"title":"操作BOM","level":"1.4.3","depth":2,"path":"js/cao-zuo-bom.md","ref":"js/cao-zuo-bom.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"js/es6xin-te-xing.md","mtime":"2018-11-30T11:43:37.134Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-30T11:45:09.929Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
