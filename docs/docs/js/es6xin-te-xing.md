@@ -179,3 +179,137 @@ function func({a, b} = {'a', 'b'}){
 func({a: 1}); // 1 'b'
 ```
 ## 六、Promise
+Promise对象可以将异步编程（特别是ajax）变成链式调用形式，更具可读性和可维护性。
+* 简单getJSON函数的封装
+```js
+const getJSON = (url) => {
+    return new Promise(function(resolve, reject){ // 执行函数
+        const xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        xmlHttp.open('GET', url, true);
+        xmlHttp.send();
+	    xmlHttp.onreadystatechange=function(){
+		    if (xmlHttp.readyState==4 && xmlHttp.status==200){
+		        try{
+		            let response = JSON.parse(xmlHttp.responseText);
+			        resolve(xmlHttp.response); // 
+		        }catch(e){
+		            reject(e);
+		        }
+		    }else{
+		        reject(new Error(xmlHttp.statusText)));
+		    }
+	    }
+    }).
+    // 执行函数代码正常时进行后续处理
+    then(function(res){
+        console.log(res);
+    }).
+    // 执行函数代码错误时进行的后续错误处理
+    catch(function(e){
+        console.log(e);
+    });
+}
+```
+> 笔记：
+> 1. promise对象在创建时立即执行执行函数，立即执行函数用于分配任务，在执行函数中调用resolve（）和reject()函数，将分别触发then和catch函数任务。
+> 2. then和catch执行完成会返回一个新的Promise对象实例，故可以链式调用。
+> 3. 如果执行函数或者then方法抛出异常，catch方法可以捕获异常并且执行
+* 已决或已拒绝Promise对象
+```js
+// 已决Promise
+let promise1 = Promise.resolve(<param>);
+// 已拒绝Promise
+let promise2 = Promise.reject(<param>);
+// 已决定了执行后状态的Promise可以直接调用then或者catch
+promise1.then(function(param){
+    console.log(param);
+});
+promise2.catch(function(param){
+    console.log(param);
+});
+```
+* 非Promise的Thenable对象
+```js
+/** 
+当一个非Promise对象拥有一个能接受 resolve 与 reject 参数的 then() 方法，这个对象被称为非Promise的Thenable对象；
+它能被Promise.resolve和Promise.reject方法调用。
+*/
+let thenable1 = {
+    then: function(resolve, reject) {
+        resolve('resolve');
+    }
+};
+let thenable2 = {
+    then: function(resolve, reject) {
+        reject('reject');
+    }
+};
+let t1 = Promise.resolve(thenable1); // 'resolve'
+t1.then(function(value){
+    console.log(value);
+});
+let t2 = Promise.resolve(thenable2); // 'reject'
+t2.catch(function(value){
+    console.log(value);
+});
+```
+* 串行Promise
+```js
+/**
+    then方法可以连续多个，使用return返回值进行参数传递
+*/
+let p1 = new Promise(function(resolve, reject) {
+    resolve(42);
+});
+p1.then(function(value) {
+    console.log(value); // 42
+    return value + 1; // 传递到下一个then的参数
+}).then(function(value) {
+    console.log(value); // 43
+});
+```
+* ###多Promise对象处理
+* Promise.all() <br />
+使用Promise处理异步操作时，当一个异步操作需要在多个异步操作执行完成后执行，那么可以使用Promise对象all表示这种逻辑。
+```js
+let p1 = new Promise(function(resolve, reject) {
+    resolve(42);
+});
+let p2 = new Promise(function(resolve, reject) {
+    resolve(43);
+});
+let p3 = new Promise(function(resolve, reject) {
+    resolve(44);
+});
+let p4 = Promise.all([p1, p2, p3]);
+// p4在p1、p2、p3都执行完才执行
+p4.then(function(value) {
+    console.log(Array.isArray(value)); // true
+    console.log(value[0]); // 42
+    console.log(value[1]); // 43
+    console.log(value[2]); // 44
+});
+```
+* Promise.race <br />
+类似all方法，如果需要表示一个Promise在多个Promise对象中存在一个执行完成才执行的逻辑，可以使用Promise对象的race方法。
+```js
+let p1 = new Promise(function(resolve, reject) {
+    resolve(42);
+});
+let p2 = new Promise(function(resolve, reject) {
+    resolve(43);
+});
+let p3 = new Promise(function(resolve, reject) {
+    resolve(44);
+});
+let p4 = Promise.race([p1, p2, p3]);
+// p4在p1、p2、p3中的一个执行完才执行
+p4.then(function(value) {
+    console.log(value); // 42
+});
+```
+> 笔记：
+> all和race创建的Promis都会在一个Promise返回拒绝状态时，立即执行，并呈现拒绝状态，执行catch方法，而不需要等待其它Promise的执行。
+
+## 七、类
+es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
