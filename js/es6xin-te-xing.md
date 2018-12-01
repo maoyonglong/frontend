@@ -358,5 +358,11 @@ weakMap.set(key, 'val');
 > 1. set和map都具有has、delete、clear和forEach方法，也都存在着各自的迭代方式（见迭代器）。
 > 2. weakset和weakmap都不能对内容进行过度操控，没有forEach、delete、clear方法，没有迭代器方式，没有size属性。
 
-## 七、类
+## 八、迭代器和生成器
+es6新增了迭代器用于处理循环遍历问题，而生成器则是用于生成迭代器的函数。
+* 迭代器
+```js
+
+```
+## 九、对象和类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
