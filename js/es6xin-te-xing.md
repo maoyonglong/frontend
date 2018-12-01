@@ -311,5 +311,52 @@ p4.then(function(value) {
 > 笔记：
 > all和race创建的Promis都会在一个Promise返回拒绝状态时，立即执行，并呈现拒绝状态，执行catch方法，而不需要等待其它Promise的执行。
 
+## 七、set和map
+es6新增了set和map集合，set是一种成员唯一的类似数组的集合，map是一种类似js字面量对象（JSON）的键值对集合（键不仅可以是字符串还可以是对象）。
+* set
+```js
+// 普通set
+// ---------------------------
+let set1 = new Set();
+set1.add(5); // 添加2
+set1.add(5); // 重复会被忽略
+let set2 = new Set([1, 2]); // 使用数组创建Set
+set2.has(2); // 判断set2是否存在2
+set2.delete(2); // 删除2
+set2.clear(); // 清空set2
+set2.size; // set2的长度
+set2.forEach(function(){}, this); // set可以使用forEach
+let arr = [...set1]; // set转成数组
+// Weak Set
+// Weak Set只能存储引用类型，能够保证set的对象元素被设为null时，会被垃圾回收机制回收。
+// ------------------------------
+let weakSet1 = new WeakSet(); 
+let weakSet2 = new WeakSet([1, 2]);
+// weak set的操作与set一致。
+```
+* map
+```js
+// 普通map
+// -------------------------
+let map = new Map(); // 初始化空的map
+map.set('key', 'value'); // 添加键值对
+map.get('key'); // 获取键值对
+map.has('key'); // 判断是否存在键值对
+map.delete('key'); // 删除键值对
+map.clear(); // 清空map
+map.size; // 键值对的个数
+map = new Map([['key1', 'key2'], ['val1', 'val2']]); // 使用数组创建map
+map.forEach(function(){}, this); // map可以使用forEach
+// Weak Map
+// Weak Map只能存储键是引用类型的键值对，作用与weak set一样。
+// -----------------------------
+let weakMap = new WeakMap();
+let key = {};
+weakMap.set(key, 'val');
+```
+> 笔记：
+> 1. set和map都具有has、delete、clear和forEach方法，也都存在着各自的迭代方式（见迭代器）。
+> 2. weakset和weakmap都不能对内容进行过度操控，没有forEach、delete、clear方法，没有迭代器方式，没有size属性。
+
 ## 七、类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
