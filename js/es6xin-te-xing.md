@@ -495,3 +495,26 @@ run(function*() {
 
 ## 九、对象和类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
+* 对象
+```js
+// 方法简写
+let obj = {
+    name: 'obj',
+    getName() {
+        // 简写方式允许使用super();
+        return this.name;
+    }
+};
+// 变量名属性
+let lastName = 'lastName';
+obj = {
+    'firstName': 'first',
+    [lastName]: 'second' 
+};
+// 或者
+let suffix = 'Name';
+obj = {
+    ['first' + suffix]: 'first',
+    ['second' + suffix]: 'second'
+};
+```
