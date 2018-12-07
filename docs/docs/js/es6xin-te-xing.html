@@ -656,7 +656,64 @@ all&#x548C;race&#x521B;&#x5EFA;&#x7684;Promis&#x90FD;&#x4F1A;&#x5728;&#x4E00;&#x
 </blockquote>
 </li>
 </ul>
-<h2 id="&#x4E03;&#x3001;&#x7C7B;">&#x4E03;&#x3001;&#x7C7B;</h2>
+<h2 id="&#x4E03;&#x3001;set&#x548C;map">&#x4E03;&#x3001;set&#x548C;map</h2>
+<p>es6&#x65B0;&#x589E;&#x4E86;set&#x548C;map&#x96C6;&#x5408;&#xFF0C;set&#x662F;&#x4E00;&#x79CD;&#x6210;&#x5458;&#x552F;&#x4E00;&#x7684;&#x7C7B;&#x4F3C;&#x6570;&#x7EC4;&#x7684;&#x96C6;&#x5408;&#xFF0C;map&#x662F;&#x4E00;&#x79CD;&#x7C7B;&#x4F3C;js&#x5B57;&#x9762;&#x91CF;&#x5BF9;&#x8C61;&#xFF08;JSON&#xFF09;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x96C6;&#x5408;&#xFF08;&#x952E;&#x4E0D;&#x4EC5;&#x53EF;&#x4EE5;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x8FD8;&#x53EF;&#x4EE5;&#x662F;&#x5BF9;&#x8C61;&#xFF09;&#x3002;</p>
+<ul>
+<li>set<pre><code class="lang-js"><span class="hljs-comment">// &#x666E;&#x901A;set</span>
+<span class="hljs-comment">// ---------------------------</span>
+<span class="hljs-keyword">let</span> set1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>();
+set1.add(<span class="hljs-number">5</span>); <span class="hljs-comment">// &#x6DFB;&#x52A0;2</span>
+set1.add(<span class="hljs-number">5</span>); <span class="hljs-comment">// &#x91CD;&#x590D;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;</span>
+<span class="hljs-keyword">let</span> set2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]); <span class="hljs-comment">// &#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x521B;&#x5EFA;Set</span>
+set2.has(<span class="hljs-number">2</span>); <span class="hljs-comment">// &#x5224;&#x65AD;set2&#x662F;&#x5426;&#x5B58;&#x5728;2</span>
+set2.delete(<span class="hljs-number">2</span>); <span class="hljs-comment">// &#x5220;&#x9664;2</span>
+set2.clear(); <span class="hljs-comment">// &#x6E05;&#x7A7A;set2</span>
+set2.size; <span class="hljs-comment">// set2&#x7684;&#x957F;&#x5EA6;</span>
+set2.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{}, <span class="hljs-keyword">this</span>); <span class="hljs-comment">// set&#x53EF;&#x4EE5;&#x4F7F;&#x7528;forEach</span>
+<span class="hljs-keyword">let</span> arr = [...set1]; <span class="hljs-comment">// set&#x8F6C;&#x6210;&#x6570;&#x7EC4;</span>
+<span class="hljs-comment">// Weak Set</span>
+<span class="hljs-comment">// Weak Set&#x53EA;&#x80FD;&#x5B58;&#x50A8;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#xFF0C;&#x80FD;&#x591F;&#x4FDD;&#x8BC1;set&#x7684;&#x5BF9;&#x8C61;&#x5143;&#x7D20;&#x88AB;&#x8BBE;&#x4E3A;null&#x65F6;&#xFF0C;&#x4F1A;&#x88AB;&#x5783;&#x573E;&#x56DE;&#x6536;&#x673A;&#x5236;&#x56DE;&#x6536;&#x3002;</span>
+<span class="hljs-comment">// ------------------------------</span>
+<span class="hljs-keyword">let</span> weakSet1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">WeakSet</span>(); 
+<span class="hljs-keyword">let</span> weakSet2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">WeakSet</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]);
+<span class="hljs-comment">// weak set&#x7684;&#x64CD;&#x4F5C;&#x4E0E;set&#x4E00;&#x81F4;&#x3002;</span>
+</code></pre>
+</li>
+<li>map<pre><code class="lang-js"><span class="hljs-comment">// &#x666E;&#x901A;map</span>
+<span class="hljs-comment">// -------------------------</span>
+<span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>(); <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x7A7A;&#x7684;map</span>
+map.set(<span class="hljs-string">&apos;key&apos;</span>, <span class="hljs-string">&apos;value&apos;</span>); <span class="hljs-comment">// &#x6DFB;&#x52A0;&#x952E;&#x503C;&#x5BF9;</span>
+map.get(<span class="hljs-string">&apos;key&apos;</span>); <span class="hljs-comment">// &#x83B7;&#x53D6;&#x952E;&#x503C;&#x5BF9;</span>
+map.has(<span class="hljs-string">&apos;key&apos;</span>); <span class="hljs-comment">// &#x5224;&#x65AD;&#x662F;&#x5426;&#x5B58;&#x5728;&#x952E;&#x503C;&#x5BF9;</span>
+map.delete(<span class="hljs-string">&apos;key&apos;</span>); <span class="hljs-comment">// &#x5220;&#x9664;&#x952E;&#x503C;&#x5BF9;</span>
+map.clear(); <span class="hljs-comment">// &#x6E05;&#x7A7A;map</span>
+map.size; <span class="hljs-comment">// &#x952E;&#x503C;&#x5BF9;&#x7684;&#x4E2A;&#x6570;</span>
+map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>([[<span class="hljs-string">&apos;key1&apos;</span>, <span class="hljs-string">&apos;key2&apos;</span>], [<span class="hljs-string">&apos;val1&apos;</span>, <span class="hljs-string">&apos;val2&apos;</span>]]); <span class="hljs-comment">// &#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x521B;&#x5EFA;map</span>
+map.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{}, <span class="hljs-keyword">this</span>); <span class="hljs-comment">// map&#x53EF;&#x4EE5;&#x4F7F;&#x7528;forEach</span>
+<span class="hljs-comment">// Weak Map</span>
+<span class="hljs-comment">// Weak Map&#x53EA;&#x80FD;&#x5B58;&#x50A8;&#x952E;&#x662F;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x7684;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x4F5C;&#x7528;&#x4E0E;weak set&#x4E00;&#x6837;&#x3002;</span>
+<span class="hljs-comment">// -----------------------------</span>
+<span class="hljs-keyword">let</span> weakMap = <span class="hljs-keyword">new</span> <span class="hljs-built_in">WeakMap</span>();
+<span class="hljs-keyword">let</span> key = {};
+weakMap.set(key, <span class="hljs-string">&apos;val&apos;</span>);
+</code></pre>
+<blockquote>
+<p>&#x7B14;&#x8BB0;&#xFF1A;</p>
+<ol>
+<li>set&#x548C;map&#x90FD;&#x5177;&#x6709;has&#x3001;delete&#x3001;clear&#x548C;forEach&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x90FD;&#x5B58;&#x5728;&#x7740;&#x5404;&#x81EA;&#x7684;&#x8FED;&#x4EE3;&#x65B9;&#x5F0F;&#xFF08;&#x89C1;&#x8FED;&#x4EE3;&#x5668;&#xFF09;&#x3002;</li>
+<li>weakset&#x548C;weakmap&#x90FD;&#x4E0D;&#x80FD;&#x5BF9;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x8FC7;&#x5EA6;&#x64CD;&#x63A7;&#xFF0C;&#x6CA1;&#x6709;forEach&#x3001;delete&#x3001;clear&#x65B9;&#x6CD5;&#xFF0C;&#x6CA1;&#x6709;&#x8FED;&#x4EE3;&#x5668;&#x65B9;&#x5F0F;&#xFF0C;&#x6CA1;&#x6709;size&#x5C5E;&#x6027;&#x3002;</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="&#x516B;&#x3001;&#x8FED;&#x4EE3;&#x5668;&#x548C;&#x751F;&#x6210;&#x5668;">&#x516B;&#x3001;&#x8FED;&#x4EE3;&#x5668;&#x548C;&#x751F;&#x6210;&#x5668;</h2>
+<p>es6&#x65B0;&#x589E;&#x4E86;&#x8FED;&#x4EE3;&#x5668;&#x7528;&#x4E8E;&#x5904;&#x7406;&#x5FAA;&#x73AF;&#x904D;&#x5386;&#x95EE;&#x9898;&#xFF0C;&#x800C;&#x751F;&#x6210;&#x5668;&#x5219;&#x662F;&#x7528;&#x4E8E;&#x751F;&#x6210;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x51FD;&#x6570;&#x3002;</p>
+<ul>
+<li>&#x8FED;&#x4EE3;&#x5668;
+```js</li>
+</ul>
+<p>```</p>
+<h2 id="&#x4E5D;&#x3001;&#x5BF9;&#x8C61;&#x548C;&#x7C7B;">&#x4E5D;&#x3001;&#x5BF9;&#x8C61;&#x548C;&#x7C7B;</h2>
 <p>es6&#x7684;&#x7C7B;&#x4F7F;&#x7528;class&#x5173;&#x952E;&#x5B57;&#x6765;&#x58F0;&#x660E;&#xFF0C;&#x5B83;&#x589E;&#x5F3A;&#x4E86;&#x539F;&#x578B;&#x7EE7;&#x627F;&#x65B9;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;extend&#x5173;&#x952E;&#x5B57;&#x6765;&#x58F0;&#x660E;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#xFF0C;&#x8FD8;&#x589E;&#x52A0;&#x4E86;&#x65B0;&#x7684;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;&#x3001;super&#x5173;&#x952E;&#x5B57;&#x7B49;&#x5185;&#x5BB9;&#x3002;</p>
 
                                 
@@ -697,7 +754,7 @@ all&#x548C;race&#x521B;&#x5EFA;&#x7684;Promis&#x90FD;&#x4F1A;&#x5728;&#x4E00;&#x
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ES6新特性","level":"1.4.4","depth":2,"previous":{"title":"操作BOM","level":"1.4.3","depth":2,"path":"js/cao-zuo-bom.md","ref":"js/cao-zuo-bom.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"js/es6xin-te-xing.md","mtime":"2018-11-30T11:43:37.134Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-30T11:45:09.929Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ES6新特性","level":"1.4.4","depth":2,"previous":{"title":"操作BOM","level":"1.4.3","depth":2,"path":"js/cao-zuo-bom.md","ref":"js/cao-zuo-bom.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"js/es6xin-te-xing.md","mtime":"2018-12-01T15:37:39.554Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-01T15:40:13.837Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
