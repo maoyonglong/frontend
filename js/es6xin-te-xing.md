@@ -492,5 +492,6 @@ run(function*() {
 > 笔记：
 > 1. 字符串、数组、map、set、object、NodeList都可以使用of进行遍历，它们是可迭代对象。
 > 2. values()、keys()、entries()方法都会返回一个可迭代对象
+
 ## 九、对象和类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
