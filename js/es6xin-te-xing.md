@@ -448,5 +448,49 @@ do{
 // 4
 // undefined
 ```
+* 任务执行器
+```js
+function run(taskDef){
+    let task = taskDef(); // 创建迭代器
+    let result = task.next(); // 启动任务，步骤执行1次
+    // 循环步骤
+    function step(){
+        // 如果任务未完成{
+        if(!result.done){
+            // 是否是执行任务的逻辑函数
+            if(typeof result.value==='function'){
+                result.value(function(err, data){
+                    if (err) {
+                        result = task.throw(err);
+                        return;
+                    }
+                    result = task.next(data);
+                    step();
+                });
+            }else{
+                result = task.next(result.value);
+                step();
+            }
+        }
+    }
+    // 执行循环函数
+    step();
+}
+// 使用
+let fs = require("fs");
+function readFile(filename) {
+    return function(callback) {
+        fs.readFile(filename, callback);
+    };
+}
+run(function*() {
+    let contents = yield readFile("config.json");
+    doSomethingWith(contents);
+    console.log("Done");
+});
+```
+> 笔记：
+> 1. 字符串、数组、map、set、object、NodeList都可以使用of进行遍历，它们是可迭代对象。
+> 2. values()、keys()、entries()方法都会返回一个可迭代对象
 ## 九、对象和类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
