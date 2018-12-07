@@ -495,9 +495,8 @@ run(function*() {
 
 ## 九、对象和类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
-* 对象
+* 对象方法简写 
 ```js
-// 方法简写
 let obj = {
     name: 'obj',
     getName() {
@@ -505,16 +504,54 @@ let obj = {
         return this.name;
     }
 };
-// 变量名属性
+```
+* 对象变量名属性
+```js
 let lastName = 'lastName';
-obj = {
+let obj = {
     'firstName': 'first',
-    [lastName]: 'second' 
+//    [lastName]: 'second'
 };
 // 或者
 let suffix = 'Name';
-obj = {
-    ['first' + suffix]: 'first',
-    ['second' + suffix]: 'second'
+let obj = {
+//    ['first' + suffix]: 'first',
+//    ['second' + suffix]: 'second'
 };
+```
+* 对象相关原型方法
+```js
+Object.create(Array); // 返回原型为Array的对象，并且可以使用prototype访问；并非只有\_\_proto\_\_属性
+Object.getPrototypeOf(obj); // 获取obj的原型对象
+Object.setPrototype(obj， Object); // 设置obj的原型对象为Object
+```
+* super
+```js
+// 不使用super访问原型方法
+let person = {
+    name: 'Person',
+    getName() {
+        return this.name;
+    }
+};
+let son = {
+    name: 'Son',
+    getName() {
+        // 访问原型中的方法
+        return Object.getPrototypeOf(this).getName.call(this);
+    }
+};
+Object.setPrototypeOf(son, person);
+son.getName(); // son
+/*
+    然而，如果原型链过长，并不好用；
+    下面代码出现栈溢出错误。这是因为:
+    mike调用getName时this是mike，
+    而它的原型是son,
+    故反复调用son的getName方法   
+*/
+let mike = Object.create(Object);
+Object.setPrototypeOf(mike, son);
+mike.name = 'mike';
+mike.getName();
 ```
