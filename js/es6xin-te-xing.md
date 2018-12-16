@@ -555,3 +555,92 @@ Object.setPrototypeOf(mike, son);
 mike.name = 'mike';
 mike.getName();
 ```
+* 类的声明
+```js
+// 匿名
+let NoName = class {
+    // ...
+};
+// 具名
+// alias为别名
+let alias = class HasName {
+    // ...
+};
+```
+* 构造器和方法
+```js
+let variable = "methodName";
+class ClassName{
+    // 构造器
+    constructor() {
+        this.attr= val; // 成员变量
+    },
+    // 普通成员方法
+    normal() {
+        // ...
+    },
+    // 访问器属性方法
+    set setMethod() {
+        // ...
+    },
+    get getMethod() {
+        // ...
+        return ...;
+    },
+    // 变量名（可计算成员名）方法
+    [variable]() {
+        // ...
+    },
+    // 生成器方法
+    *generator() {
+        // ...
+    }
+    // 静态方法 相当于 ClassName.staticMethod
+    static staticMethod() {
+        // ...
+    }
+};
+// 方法的使用
+let obj = new ClassName(); // 创建对象
+obj.normal(); // 调用对象方法
+ClassName.staticMethod(); // 调用类的静态方法
+```
+* 继承
+```js
+class Father{
+    constructor(name) {
+        this.name = "father";
+    },
+    getName() {
+        return this.name;
+    },
+    say() {
+        console.log("I am father.");
+    },
+    static toString() {
+        return "[Class instanceof Person]";
+    }
+};
+// Son 继承自 Father，这是原型继承
+class Son extends Father{
+    constructor(name) {
+        // 调用父类的构造器
+        super(name); // 与Father.call(this)相同
+    },
+    // 重写父类的同名方法    
+    say() {
+        console.log("I am son.");
+    },
+    clone() {
+        // constructor的Symbol.species属性返回类名Son
+        return new this.constructor[Symbol.species](this.name);
+    }
+};
+let son = new Son("son");
+son.getName(); // son
+son.say(); // I am son
+Son.toString(); // [Class instanceof Person]
+```
+> 笔记：
+> 对象和属性具有许多非常相似的特性，这是因为类是对象的抽象化封装，应该相互记忆
+## 十
