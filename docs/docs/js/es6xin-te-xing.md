@@ -360,9 +360,198 @@ weakMap.set(key, 'val');
 
 ## 八、迭代器和生成器
 es6新增了迭代器用于处理循环遍历问题，而生成器则是用于生成迭代器的函数。
-* 迭代器
+* 迭代器与迭代对象
 ```js
-
+// 迭代器是使用next方法一步一步遍历元素的对象
+// es5实现迭代器
+function createIterator(items){
+    var i = 0;
+    return {
+        next: function(){
+            var done = i >= items.length; // 遍历是否完成
+            var value = !done ? value[i++] : undefined; 
+            return {
+                done: done,
+                value: value
+            };
+        }
+    };
+}
+var iter = createIterator([1,2,3]); // 创建遍历数组的迭代器
+iter.next(); // 返回下一个元素 
+// es6迭代对象
+let arr = [1,2,3]; 
+// 数组是可迭代对象，因为具有Symbol.iterator属性
+// 该属性是一个函数，它用于创建默认迭代器arr[Symbol.iterator]();
+// js引擎后台在of关键字使用时，自动调用该函数创建迭代器，并使用next等方法自动遍历可迭代对象
+for(let item of arr){
+    console.log(item);
+}
 ```
+* 生成器
+```js
+// 带星号的函数被称为generator（生成器）
+// 普通生成器
+function *generator(){
+    yield 1;
+    yield 2;
+    yield 3;
+}
+let iter = generator(); 
+// 生成器会依据yield返回迭代器对象，每个yield的返回都会暂停执行函数，等待迭代器对象使用下一个值才执行。
+iter.next().value; // 1
+iter.next().value; // 2
+iter.next().value; // 3
+// 传参生成器
+function *createIterator(){
+    // 先执行yield返回后，再执行赋值操作
+    let first = yield 1;
+    let second = yield frist + 2;
+    let third;
+    try{
+        third = yield second + 3;
+    }catch(e){
+        third = 'throw error';
+    }
+    return; // 提前结束generator
+    yield 2;
+} 
+let iter = createIterator();
+iter.next(2).value; // 1
+iter.next(3).value; // first+2 -> 3
+iter.next(new Error('error')); // throw error
+iter.next().value; // undefined 
+// 生成器委托 
+// 生成器委托其实像函数把相同的代码进行封装，函数里面调用多个函数的情况
+function subIterator1(){
+    yield 1;
+    yield 2;
+}
+function subIterator2(){
+    yield 3;
+    yield 4;
+}
+function *createIterator(){
+    yield *subIterator1();
+    yield *subIterator2();
+}
+let iter = createIterator();
+let item;
+do{
+    item = iter.next();
+    console.log(item.value);
+}while(!item.done);
+// 结果：
+// 1
+// 2
+// 3
+// 4
+// undefined
+```
+* 任务执行器
+```js
+function run(taskDef){
+    let task = taskDef(); // 创建迭代器
+    let result = task.next(); // 启动任务，步骤执行1次
+    // 循环步骤
+    function step(){
+        // 如果任务未完成{
+        if(!result.done){
+            // 是否是执行任务的逻辑函数
+            if(typeof result.value==='function'){
+                result.value(function(err, data){
+                    if (err) {
+                        result = task.throw(err);
+                        return;
+                    }
+                    result = task.next(data);
+                    step();
+                });
+            }else{
+                result = task.next(result.value);
+                step();
+            }
+        }
+    }
+    // 执行循环函数
+    step();
+}
+// 使用
+let fs = require("fs");
+function readFile(filename) {
+    return function(callback) {
+        fs.readFile(filename, callback);
+    };
+}
+run(function*() {
+    let contents = yield readFile("config.json");
+    doSomethingWith(contents);
+    console.log("Done");
+});
+```
+> 笔记：
+> 1. 字符串、数组、map、set、object、NodeList都可以使用of进行遍历，它们是可迭代对象。
+> 2. values()、keys()、entries()方法都会返回一个可迭代对象
+
 ## 九、对象和类
 es6的类使用class关键字来声明，它增强了原型继承方式，可以使用extend关键字来声明继承关系，还增加了新的方法定义方式、super关键字等内容。
+* 对象方法简写 
+```js
+let obj = {
+    name: 'obj',
+    getName() {
+        // 简写方式允许使用super();
+        return this.name;
+    }
+};
+```
+* 对象变量名属性
+```js
+let lastName = 'lastName';
+let obj = {
+    'firstName': 'first',
+//    [lastName]: 'second'
+};
+// 或者
+let suffix = 'Name';
+let obj = {
+//    ['first' + suffix]: 'first',
+//    ['second' + suffix]: 'second'
+};
+```
+* 对象相关原型方法
+```js
+Object.create(Array); // 返回原型为Array的对象，并且可以使用prototype访问；并非只有\_\_proto\_\_属性
+Object.getPrototypeOf(obj); // 获取obj的原型对象
+Object.setPrototype(obj， Object); // 设置obj的原型对象为Object
+```
+* super
+```js
+// 不使用super访问原型方法
+let person = {
+    name: 'Person',
+    getName() {
+        return this.name;
+    }
+};
+let son = {
+    name: 'Son',
+    getName() {
+        // 访问原型中的方法
+        return Object.getPrototypeOf(this).getName.call(this);
+    }
+};
+Object.setPrototypeOf(son, person);
+son.getName(); // son
+/*
+    然而，如果原型链过长，并不好用；
+    下面代码出现栈溢出错误。这是因为:
+    mike调用getName时this是mike，
+    而它的原型是son,
+    故反复调用son的getName方法   
+*/
+let mike = Object.create(Object);
+Object.setPrototypeOf(mike, son);
+mike.name = 'mike';
+mike.getName();
+```

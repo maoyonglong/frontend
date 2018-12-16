@@ -902,6 +902,94 @@ mike.name = <span class="hljs-string">&apos;mike&apos;</span>;
 mike.getName();
 </code></pre>
 </li>
+<li>&#x7C7B;&#x7684;&#x58F0;&#x660E;<pre><code class="lang-js"><span class="hljs-comment">// &#x533F;&#x540D;</span>
+<span class="hljs-keyword">let</span> NoName = <span class="hljs-class"><span class="hljs-keyword">class</span> </span>{
+  <span class="hljs-comment">// ...</span>
+};
+<span class="hljs-comment">// &#x5177;&#x540D;</span>
+<span class="hljs-comment">// alias&#x4E3A;&#x522B;&#x540D;</span>
+<span class="hljs-keyword">let</span> alias = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HasName</span> </span>{
+  <span class="hljs-comment">// ...</span>
+};
+</code></pre>
+</li>
+<li>&#x6784;&#x9020;&#x5668;&#x548C;&#x65B9;&#x6CD5;<pre><code class="lang-js"><span class="hljs-keyword">let</span> variable = <span class="hljs-string">&quot;methodName&quot;</span>;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassName</span></span>{
+  <span class="hljs-comment">// &#x6784;&#x9020;&#x5668;</span>
+  <span class="hljs-keyword">constructor</span>() {
+      <span class="hljs-keyword">this</span>.attr= val; <span class="hljs-comment">// &#x6210;&#x5458;&#x53D8;&#x91CF;</span>
+  },
+  <span class="hljs-comment">// &#x666E;&#x901A;&#x6210;&#x5458;&#x65B9;&#x6CD5;</span>
+  normal() {
+      <span class="hljs-comment">// ...</span>
+  },
+  <span class="hljs-comment">// &#x8BBF;&#x95EE;&#x5668;&#x5C5E;&#x6027;&#x65B9;&#x6CD5;</span>
+  set setMethod() {
+      <span class="hljs-comment">// ...</span>
+  },
+  get getMethod() {
+      <span class="hljs-comment">// ...</span>
+      <span class="hljs-keyword">return</span> ...;
+  },
+  <span class="hljs-comment">// &#x53D8;&#x91CF;&#x540D;&#xFF08;&#x53EF;&#x8BA1;&#x7B97;&#x6210;&#x5458;&#x540D;&#xFF09;&#x65B9;&#x6CD5;</span>
+  [variable]() {
+      <span class="hljs-comment">// ...</span>
+  },
+  <span class="hljs-comment">// &#x751F;&#x6210;&#x5668;&#x65B9;&#x6CD5;</span>
+  *generator() {
+      <span class="hljs-comment">// ...</span>
+  }
+  <span class="hljs-comment">// &#x9759;&#x6001;&#x65B9;&#x6CD5; &#x76F8;&#x5F53;&#x4E8E; ClassName.staticMethod</span>
+  <span class="hljs-keyword">static</span> staticMethod() {
+      <span class="hljs-comment">// ...</span>
+  }
+};
+<span class="hljs-comment">// &#x65B9;&#x6CD5;&#x7684;&#x4F7F;&#x7528;</span>
+<span class="hljs-keyword">let</span> obj = <span class="hljs-keyword">new</span> ClassName(); <span class="hljs-comment">// &#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span>
+obj.normal(); <span class="hljs-comment">// &#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;</span>
+ClassName.staticMethod(); <span class="hljs-comment">// &#x8C03;&#x7528;&#x7C7B;&#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;</span>
+</code></pre>
+</li>
+<li>&#x7EE7;&#x627F;<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span></span>{
+  <span class="hljs-keyword">constructor</span>(name) {
+      <span class="hljs-keyword">this</span>.name = <span class="hljs-string">&quot;father&quot;</span>;
+  },
+  getName() {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name;
+  },
+  say() {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;I am father.&quot;</span>);
+  },
+  <span class="hljs-keyword">static</span> toString() {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[Class instanceof Person]&quot;</span>;
+  }
+};
+<span class="hljs-comment">// Son &#x7EE7;&#x627F;&#x81EA; Father&#xFF0C;&#x8FD9;&#x662F;&#x539F;&#x578B;&#x7EE7;&#x627F;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span></span>{
+  <span class="hljs-keyword">constructor</span>(name) {
+      <span class="hljs-comment">// &#x8C03;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x5668;</span>
+      <span class="hljs-keyword">super</span>(name); <span class="hljs-comment">// &#x4E0E;Father.call(this)&#x76F8;&#x540C;</span>
+  },
+  <span class="hljs-comment">// &#x91CD;&#x5199;&#x7236;&#x7C7B;&#x7684;&#x540C;&#x540D;&#x65B9;&#x6CD5;    </span>
+  say() {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;I am son.&quot;</span>);
+  },
+  clone() {
+      <span class="hljs-comment">// constructor&#x7684;Symbol.species&#x5C5E;&#x6027;&#x8FD4;&#x56DE;&#x7C7B;&#x540D;Son</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.constructor[<span class="hljs-built_in">Symbol</span>.species](<span class="hljs-keyword">this</span>.name);
+  }
+};
+<span class="hljs-keyword">let</span> son = <span class="hljs-keyword">new</span> Son(<span class="hljs-string">&quot;son&quot;</span>);
+son.getName(); <span class="hljs-comment">// son</span>
+son.say(); <span class="hljs-comment">// I am son</span>
+Son.toString(); <span class="hljs-comment">// [Class instanceof Person]</span>
+</code></pre>
+<blockquote>
+<p>&#x7B14;&#x8BB0;&#xFF1A;
+&#x5BF9;&#x8C61;&#x548C;&#x5C5E;&#x6027;&#x5177;&#x6709;&#x8BB8;&#x591A;&#x975E;&#x5E38;&#x76F8;&#x4F3C;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x7C7B;&#x662F;&#x5BF9;&#x8C61;&#x7684;&#x62BD;&#x8C61;&#x5316;&#x5C01;&#x88C5;&#xFF0C;&#x5E94;&#x8BE5;&#x76F8;&#x4E92;&#x8BB0;&#x5FC6;</p>
+<h2 id="&#x5341;">&#x5341;</h2>
+</blockquote>
+</li>
 </ul>
 
                                 
@@ -942,7 +1030,7 @@ mike.getName();
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ES6新特性","level":"1.4.4","depth":2,"previous":{"title":"操作BOM","level":"1.4.3","depth":2,"path":"js/cao-zuo-bom.md","ref":"js/cao-zuo-bom.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"js/es6xin-te-xing.md","mtime":"2018-12-07T13:43:11.564Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-07T13:44:36.296Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ES6新特性","level":"1.4.4","depth":2,"previous":{"title":"操作BOM","level":"1.4.3","depth":2,"path":"js/cao-zuo-bom.md","ref":"js/cao-zuo-bom.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters"],"pluginsConfig":{"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"js/es6xin-te-xing.md","mtime":"2018-12-16T13:52:26.847Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-16T14:00:48.537Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
